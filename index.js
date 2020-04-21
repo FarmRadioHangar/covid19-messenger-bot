@@ -6,11 +6,13 @@ const am = require('./corona-am');
 const fr = require('./corona-fr');
 const env_vars = require('./env')
 
-const bot = new BootBot(env_vars.bot_codes);
+const bot = new BootBot({
+  accessToken: 'EAANOret9tIoBAFdfqZCIwOArZCcFlKBin2nM5aoKo6dRWdA7OvNI5Bo9orQxq4ezvTTocBw1F6xs77Fl0DotrUwQgFoA8aBSgRdEtcEgEJkqWUoR0DgdxYYxZCprOyN0vyqTrTO7EZAtXS7uhnyGAKFQQwXzXrLGO0efworGhGZC8UzZCb5QnjNxDg2zrCoYsZD',
+  verifyToken: 'hello_facebook',
+  appSecret: '19dc3b46a9124b3f989116c6e68335a4',
+});
 
 const get_user = function(userId) {
-
-  console.log(env_vars.uri)
    return new Promise(function(resolve,reject) {
                   request({url: env_vars.uri+'/api/v1/covid19/chat_users?user_id=m-'+userId,json:true},
                    function(err,res,json) {
@@ -247,4 +249,4 @@ bot.app.route('/test-server').get(function(req,res) {
 });
 
 
-bot.start(env_vars.port);
+bot.start();

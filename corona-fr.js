@@ -67,7 +67,7 @@ const sendSummary = (convo) => {
   convo.say({text:`Thank you, your message is recieved:
        - Name: ${convo.get('name')}
        - Radio station: ${convo.get('station')}
-       - Question/Comment: ${convo.get('question')}`,
+       - Question/Comment: ${convo.get('text')}`,
        buttons: [
             { type: 'postback', title: 'Go back', payload:'GO_BACK' }
           ]
@@ -81,8 +81,7 @@ exports.ask = (convo) => {
  convo.ask(`*❓What is your question or comment concerning COVID-19 & communication ?* \n\nYou can either use text or audio inputs to submit. Your questions will reach experts and you will recieve a response via your messenger account as soon as possible.`, (payload, convo) => {
   let question = "None"
   if (payload.message.attachments) {
-     console.log(payload.message.attachments[0].payload)
-      question = payload.message.attachments[0].type+" message"
+      question = payload.message.attachments[0].payload.url
       convo.set('type',payload.message.attachments[0].type)
   }
   else {
@@ -101,7 +100,7 @@ exports.how_the_virus_is_spread = (chat) => {
  chat.say({text:"*🦠 How the virus is spread*\n\n People catch COVID-19 from others who have the virus. The disease is spread through small droplets produced when infected people cough, sneeze, or exhale ... ",
 
  buttons: [
-      { type: 'web_url', title:"Read more", url: 'https://log.uliza.fm/api/covid/en/HOW_THE_VIRUS_IS_SPREAD',webview_height_ratio: "COMPACT",
+      { type: 'web_url', title:"Read more", url: 'https://log.uliza.fm/api/v1/covid/topic/fr/HOW_THE_VIRUS_IS_SPREAD',webview_height_ratio: "COMPACT",
           messenger_extensions: true},
       { type: 'postback', title: 'Go back', payload:'GO_BACK' }
     ]
@@ -115,7 +114,7 @@ exports.symptoms_of_infection = (chat) => {
  chat.say({text:"*🦠 Symptoms of infection*\n\nThe most common symptoms of COVID-19 are fever, tiredness, and dry cough ...",
 
  buttons: [
-      { type: 'web_url', title:"Read more", url: 'https://log.uliza.fm/api/covid/en/SYMPTOMS_OF_INFECTION',webview_height_ratio: "COMPACT",
+      { type: 'web_url', title:"Read more", url: 'https://log.uliza.fm/api/v1/covid/topic/fr/SYMPTOMS_OF_INFECTION',webview_height_ratio: "COMPACT",
           messenger_extensions: true},
       { type: 'postback', title: 'Go back', payload:'GO_BACK' }
     ]
@@ -127,7 +126,7 @@ exports.myths_misinformation = (chat) => {
  chat.say({text:"*🦠  Myths, misinformation, and fake news*\n\n There is a lot of false information circulating about COVID-19.",
 
  buttons: [
-      { type: 'web_url', title:"Read more", url: 'https://log.uliza.fm/api/covid/en/MYTHS_MISINFORMATION',webview_height_ratio: "COMPACT",
+      { type: 'web_url', title:"Read more", url: 'https://log.uliza.fm/api/v1/covid/topic/fr/MYTHS_MISINFORMATION',webview_height_ratio: "COMPACT",
           messenger_extensions: true},
           { type: 'postback', title: 'Go back', payload:'GO_BACK' }
     ]
@@ -138,7 +137,7 @@ exports.safety_for_broadcasters = (chat) => {
  chat.say({text:"*🎙 Safety for radio broadcasters*\n\nIf you must conduct a face-to-face interview, respect physical distancing. Don't leave equipment lying around when you are on assignment ...",
 
  buttons: [
-      { type: 'web_url', title:"Read more", url: 'https://log.uliza.fm/api/covid/en/SAFETY_FOR_BROADCASTERS',webview_height_ratio: "COMPACT",
+      { type: 'web_url', title:"Read more", url: 'https://log.uliza.fm/api/v1/covid/topic/fr/SAFETY_FOR_BROADCASTERS',webview_height_ratio: "COMPACT",
           messenger_extensions: true},
           { type: 'postback', title: 'Go back', payload:'GO_BACK' }
     ]
