@@ -4,6 +4,7 @@ var request = require('request');
 const en = require('./corona-en');
 const am = require('./corona-am');
 const fr = require('./corona-fr');
+const env_vars = require('./env')
 
 const bot = new BootBot({
   accessToken: 'EAANOret9tIoBAFdfqZCIwOArZCcFlKBin2nM5aoKo6dRWdA7OvNI5Bo9orQxq4ezvTTocBw1F6xs77Fl0DotrUwQgFoA8aBSgRdEtcEgEJkqWUoR0DgdxYYxZCprOyN0vyqTrTO7EZAtXS7uhnyGAKFQQwXzXrLGO0efworGhGZC8UzZCb5QnjNxDg2zrCoYsZD',
@@ -13,7 +14,7 @@ const bot = new BootBot({
 
 const get_user = function(userId) {
    return new Promise(function(resolve,reject) {
-                  request({url: 'http://localhost:4000/api/v1/covid19/chat_users?user_id=m-'+userId,json:true},
+                  request({url: env_vars.uri+'/api/v1/covid19/chat_users?user_id=m-'+userId,json:true},
                    function(err,res,json) {
                     resolve(json);
                   })
@@ -22,7 +23,7 @@ const get_user = function(userId) {
 
 const update_user = function(id,language,country='') {
  return new Promise(function(resolve,reject) {
-  request.patch('http://localhost:4000/api/v1/covid19/chat_users/'+id,
+  request.patch(env_vars.uri+'/api/v1/covid19/chat_users/'+id,
          { json: {language:language,country:country } },
          function (error, response, body) {
           console.log(body)
@@ -36,7 +37,7 @@ const update_user = function(id,language,country='') {
 
 const create_user = function(userId,language,country='') {
  return new Promise(function(resolve,reject) {
-        request.post('http://localhost:4000/api/v1/covid19/chat_users',
+        request.post(env_vars.uri+'/api/v1/covid19/chat_users',
                { json: { user_id: 'm-'+userId,language:language,country:country } },
                function (error, response, body) {
                 console.log(body)
@@ -50,7 +51,7 @@ const create_user = function(userId,language,country='') {
 
 const update_language = function(id,language) {
  return new Promise(function(resolve,reject) {
-        request.patch('http://localhost:4000/api/v1/covid19/chat_users/'+id,
+        request.patch(env_vars.uri+'/api/v1/covid19/chat_users/'+id,
                { json: {language:language } },
                function (error, response, body) {
                 console.log(body)
@@ -242,7 +243,8 @@ bot.on('referral', (payload, chat) => {
 
 })
 
-bot.app.route('/send-messenger').post(function(req,res) {
+bot.app.route('/test-server').get(function(req,res) {
+ res.send('Server is running!')
  // bot.say('3412255648802984','TEST MESSAGE')
 });
 
