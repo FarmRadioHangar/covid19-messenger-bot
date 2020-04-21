@@ -247,4 +247,4 @@ bot.app.route('/test-server').get(function(req,res) {
 });
 
 
-bot.start();
+bot.start(env_vars.port);
