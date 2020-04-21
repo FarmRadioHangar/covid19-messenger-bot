@@ -1,0 +1,8 @@
+EAANOret9tIoBAFdfqZCIwOArZCcFlKBin2nM5aoKo6dRWdA7OvNI5Bo9orQxq4ezvTTocBw1F6xs77Fl0DotrUwQgFoA8aBSgRdEtcEgEJkqWUoR0DgdxYYxZCprOyN0vyqTrTO7EZAtXS7uhnyGAKFQQwXzXrLGO0efworGhGZC8UzZCb5QnjNxDg2zrCoYsZD
+
+curl -X POST -H "Content-Type: application/json" -d '{
+  "whitelisted_domains":[
+    "https://log.uliza.fm"
+  ],
+  "domain_action_type": "add",
+}' "https://graph.facebook.com/v6.0/me/messenger_profile?access_token=EAANOret9tIoBAFdfqZCIwOArZCcFlKBin2nM5aoKo6dRWdA7OvNI5Bo9orQxq4ezvTTocBw1F6xs77Fl0DotrUwQgFoA8aBSgRdEtcEgEJkqWUoR0DgdxYYxZCprOyN0vyqTrTO7EZAtXS7uhnyGAKFQQwXzXrLGO0efworGhGZC8UzZCb5QnjNxDg2zrCoYsZD"
