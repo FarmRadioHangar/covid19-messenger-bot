@@ -67,7 +67,7 @@ const sendSummary = (convo) => {
   convo.say({text:`Thank you, your message is recieved:
        - Name: ${convo.get('name')}
        - Radio station: ${convo.get('station')}
-       - Question/Comment: ${convo.get('text')}`,
+       - Question/Comment: ${convo.get('content')}`,
        buttons: [
             { type: 'postback', title: 'Go back', payload:'GO_BACK' }
           ]
@@ -82,11 +82,11 @@ exports.ask = (convo) => {
   let question = "None"
   if (payload.message.attachments) {
       question = payload.message.attachments[0].payload.url
-      convo.set('type',payload.message.attachments[0].type)
+      convo.set('content',payload.message.attachments[0].type)
   }
   else {
     question = payload.message.text;
-    convo.set('type','text')
+    convo.set('content',question)
   }
 
   convo.set('question', question);
