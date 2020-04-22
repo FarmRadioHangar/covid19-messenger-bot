@@ -18,7 +18,7 @@ exports.learn_about_covid = (chat) => {
   	cards: [
     {
      title: 'COVID-19 ',subtitle:"How the virus is spread & the precautions; Myths, misinformation & fake news; Symptoms of infection \n ",
-      image_url: 'https://farmradio.org/wp-content/uploads/2020/03/covid-19-response_blog.jpg',
+      image_url: 'https://farmradio.org/wp-content/uploads/2020/03/covid-19-respons-banner_blog-fr.jpg',
       buttons: [
     		  { type: 'postback', title: 'How the virus spread', payload: 'HOW_THE_VIRUS_IS_SPREAD' },
     		  { type: 'postback', title: 'Symptoms of infection',payload:'SYMPTOMS_OF_INFECTION'},
