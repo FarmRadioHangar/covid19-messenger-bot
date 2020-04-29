@@ -130,37 +130,33 @@ const setLanguage = (convo,id) => {
 }
 
 const newUser = (convo,user) => {
- // convo.ask({
- //  text: 'Language | Langue | ቋንቋ',
- //  quickReplies: ["English",'Français','አማርኛ']
- // },(payload, convo)=> {
- //  const answer = payload.message.text;
- //
- //  if (answer == 'አማርኛ') {
- //   convo.set('lang','am')
- //   convo.say(`ታዲያስ ${user.first_name}`)
- //  }
- //  else if (answer == 'English') {
- //   convo.set('lang','en')
- //   convo.say(`Hi ${user.first_name}`)
- //  }
- //  else if (answer == 'Français'){
- //   convo.set('lang','fr')
- //   convo.say(`salute ${user.first_name}`)
- //  }
- //  else
- //   newUser(convo)
- //
- //  create_user(convo.userId,convo.get('lang'),`${user.first_name} ${user.last_name}`).then(function(response){
- //    eval(convo.get('lang')).intro(convo)
- //    convo.end()
- //  })
- //
- // });
- create_user(convo.userId,'en',`${user.first_name} ${user.last_name}`).then(function(response){
-   eval('en').intro(convo)
-   convo.end()
- })
+ convo.ask({
+  text: 'Language | Langue | ቋንቋ',
+  quickReplies: ["English",'Français','አማርኛ']
+ },(payload, convo)=> {
+  const answer = payload.message.text;
+
+  if (answer == 'አማርኛ') {
+   convo.set('lang','am')
+   convo.say(`ታዲያስ ${user.first_name}`)
+  }
+  else if (answer == 'English') {
+   convo.set('lang','en')
+   convo.say(`Hi ${user.first_name}`)
+  }
+  else if (answer == 'Français'){
+   convo.set('lang','fr')
+   convo.say(`salute ${user.first_name}`)
+  }
+  else
+   newUser(convo)
+
+  create_user(convo.userId,convo.get('lang'),`${user.first_name} ${user.last_name}`).then(function(response){
+    eval(convo.get('lang')).intro(convo)
+    convo.end()
+  })
+
+ });
 }
 
 bot.hear(['hello','hi','start','salut','au début','ሰላም','መጀመሪያ'], (payload, chat) => {
