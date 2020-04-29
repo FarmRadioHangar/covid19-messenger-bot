@@ -5,6 +5,7 @@ const en = require('./corona-en');
 const am = require('./corona-am');
 const fr = require('./corona-fr');
 const env_vars = require('./env')
+const get_user = require('./question-handler').get_user;
 
 const bot = new BootBot({
   accessToken: 'EAANOret9tIoBAFdfqZCIwOArZCcFlKBin2nM5aoKo6dRWdA7OvNI5Bo9orQxq4ezvTTocBw1F6xs77Fl0DotrUwQgFoA8aBSgRdEtcEgEJkqWUoR0DgdxYYxZCprOyN0vyqTrTO7EZAtXS7uhnyGAKFQQwXzXrLGO0efworGhGZC8UzZCb5QnjNxDg2zrCoYsZD',
@@ -12,21 +13,46 @@ const bot = new BootBot({
   appSecret: '19dc3b46a9124b3f989116c6e68335a4',
 });
 
-const get_user = function(userId) {
-   return new Promise(function(resolve,reject) {
-                  request({url: env_vars.uri+'/api/v1/covid19/chat_users?user_id=m-'+userId,json:true},
-                   function(err,res,json) {
-                    resolve(json);
-                  })
+
+
+var get_started = (payload, chat) => {
+ chat.getUserProfile().then((user) => {
+  chat.conversation((convo) => {
+   convo.say('👋😷').then(() => {
+    newUser(convo,user);
+   })
+  });
  })
 }
+
+bot.setGreetingText(
+ [
+   {
+     "locale":"default",
+     "text":"This is a messanger bot from Farm Radio International(farmradio.org). \n \
+      \nHere you can find information and resources for broadcasters on Coronavirus (COVID-19)."
+   },
+   {
+     "locale":"fr_FR",
+     "text":"This is a messanger bot from Farm Radio International(farmradio.org). \n \
+     \nHere you can find information and resources for broadcasters on Coronavirus (COVID-19)."
+   },
+   {
+     "locale":"fr_CA",
+     "text":"This is a messanger bot from Farm Radio International(farmradio.org). \n \
+     \nHere you can find information and resources for broadcasters on Coronavirus (COVID-19)."
+   }
+ ]
+)
+
+bot.setGetStartedButton(get_started)
+
 
 const update_user = function(id,language,country='') {
  return new Promise(function(resolve,reject) {
   request.patch(env_vars.uri+'/api/v1/covid19/chat_users/'+id,
          { json: {language:language,country:country } },
          function (error, response, body) {
-          console.log(body)
           if (!error)
            resolve(true)
           else
@@ -35,12 +61,11 @@ const update_user = function(id,language,country='') {
  })
 }
 
-const create_user = function(userId,language,country='') {
+const create_user = function(userId,language,full_name) {
  return new Promise(function(resolve,reject) {
         request.post(env_vars.uri+'/api/v1/covid19/chat_users',
-               { json: { user_id: 'm-'+userId,language:language,country:country } },
+               { json: { user_id: 'm-'+userId,language:language,full_name:full_name } },
                function (error, response, body) {
-                console.log(body)
                 if (!error)
                  resolve(true)
                 else
@@ -54,7 +79,6 @@ const update_language = function(id,language) {
         request.patch(env_vars.uri+'/api/v1/covid19/chat_users/'+id,
                { json: {language:language } },
                function (error, response, body) {
-                console.log(body)
                 if (!error)
                  resolve(true)
                 else
@@ -65,6 +89,7 @@ const update_language = function(id,language) {
 
 const access = function(func,chat) {
  get_user(chat.userId).then(function(chat_user){
+    // console.log(eval(chat_user[0].language))
     if (chat_user.length == 0)
      en[func](chat)
     else {
@@ -74,73 +99,68 @@ const access = function(func,chat) {
 }
 
 const setLanguage = (convo,id) => {
-   convo.ask('Send 1 for English *\n\nEnvoyer 2 pour le français *\n\n3 ይላኩ ለአማርኛ *',
-     (payload, convo) => {
-      const answer = payload.message.text;
+ convo.ask({
+  text: 'Language | Langue | ቋንቋ',
+  quickReplies: ["English",'Français','አማርኛ']
+ },(payload, convo)=> {
+  const answer = payload.message.text;
 
-
-      if (answer == '1') {
-       update_language(id,'en').then(function(response){
-        convo.say('Hi')
-        en.intro(convo)
-        convo.end()
-       })
-      }
-      else if (answer == '2') {
-       update_language(id,'fr').then(function(response){
-        convo.say('Bonjour')
-        fr.intro(convo,'fr')
-        convo.end()
-       })
-      }
-      else if (answer == '3') {
-       update_language(id,'am').then(function(response){
-        convo.say('ሰላም')
-        am.intro(convo,'am')
-        convo.end()
-       })
-      }
-      else {
-       setLanguage(convo,id)
-      }
-     },{typing:true})
-}
-
-const askCountry = (convo) => {
- convo.say('Country / Pays / አገርዎ')
- convo.ask('1. Ghana\n\n2. Tanzania\n\n3. ኢትዮጵያ\n\n4. Other/ሌላ',
-  (payload,convo) => {
-   const country_code = {'1':'gh','Ghana':'gh',
-                         '2':'tz','Tanzania':'tz',
-                         '3':'et','Ethiopia':'et','ኢትዮጵያ':'et',
-                         'Other':'','ሌላ':'','4':''},
-         lang_code = {'1':'en','2':'fr','3':'am'},
-         country = payload.message.text;
-
-    if (country_code[country]==undefined)
-     askCountry()
-    else
-     create_user(convo.userId,lang_code[convo.get('lang')],country_code[country]).then(function(response){
-       eval(lang_code[convo.get('lang')]).intro(convo)
-       convo.end()
+  if (answer == 'አማርኛ') {
+     update_language(id,'am').then(function(response){
+      en.intro(convo)
+      convo.end()
      })
+  }
+  else if (answer == 'English') {
+    update_language(id,'en').then(function(response){
+     en.intro(convo)
+     convo.end()
+    })
+  }
+  else if (answer == 'Français'){
+   update_language(id,'fr').then(function(response){
+    en.intro(convo)
+    convo.end()
+   })
+  }
+  else
+   setLanguage(convo)
+
  })
 }
 
-
-const newUser = (convo) => {
-   convo.ask('Send 1 for English\n\nEnvoyer 2 pour le français\n\n3 ይላኩ ለአማርኛ',
-     (payload, convo) => {
-      const answer = payload.message.text;
-
-      if (answer == '1' || answer =='2' || answer == '3') {
-       convo.set('lang',answer)
-       askCountry(convo)
-      }
-      else {
-       newUser(convo)
-      }
-     },{typing:true})
+const newUser = (convo,user) => {
+ // convo.ask({
+ //  text: 'Language | Langue | ቋንቋ',
+ //  quickReplies: ["English",'Français','አማርኛ']
+ // },(payload, convo)=> {
+ //  const answer = payload.message.text;
+ //
+ //  if (answer == 'አማርኛ') {
+ //   convo.set('lang','am')
+ //   convo.say(`ታዲያስ ${user.first_name}`)
+ //  }
+ //  else if (answer == 'English') {
+ //   convo.set('lang','en')
+ //   convo.say(`Hi ${user.first_name}`)
+ //  }
+ //  else if (answer == 'Français'){
+ //   convo.set('lang','fr')
+ //   convo.say(`salute ${user.first_name}`)
+ //  }
+ //  else
+ //   newUser(convo)
+ //
+ //  create_user(convo.userId,convo.get('lang'),`${user.first_name} ${user.last_name}`).then(function(response){
+ //    eval(convo.get('lang')).intro(convo)
+ //    convo.end()
+ //  })
+ //
+ // });
+ create_user(convo.userId,'en',`${user.first_name} ${user.last_name}`).then(function(response){
+   eval('en').intro(convo)
+   convo.end()
+ })
 }
 
 bot.hear(['hello','hi','start','salut','au début','ሰላም','መጀመሪያ'], (payload, chat) => {
@@ -149,16 +169,10 @@ bot.hear(['hello','hi','start','salut','au début','ሰላም','መጀመሪያ'
 
  user_check.then(function(chat_user) {
     if (chat_user.length == 0){
-     chat.conversation((convo) => {
-      convo.say('👋😷').then(() => {
-       newUser(convo);
-      })
-     });
+     get_started(payload,chat)
     }
     else{
     	 chat.say('👋😷').then(() => {
-       console.log(payload.message.text)
-       console.log(eval(chat_user[0].language).greetings.includes(payload.message.text))
        if (eval(chat_user[0].language).greetings.includes(payload.message.text))
         eval(chat_user[0].language).intro(chat)
        else {
@@ -175,7 +189,6 @@ bot.hear(['hello','hi','start','salut','au début','ሰላም','መጀመሪያ'
 bot.on('postback:GO_BACK', (payload, chat) => {
  access('go_back',chat)
 })
-// http://www.aaronsw.com/weblog/tdk
 bot.hear('Tips & resources', (payload, chat) => {
  access('working_from_home',chat)
 });
@@ -186,13 +199,13 @@ bot.on('postback:TIPS_AND_RESOURCES', (payload, chat) => {
 
 bot.hear('Send your question',(payload,chat) => {
 	chat.conversation((convo) => {
-  access('ask',convo)
+  access('confirm_question',convo)
 	});
 })
 
 bot.on('postback:ASK',(payload,chat) => {
 	chat.conversation((convo) => {
-  access('ask',convo)
+  access('confirm_question',convo)
 	});
 })
 
@@ -229,19 +242,19 @@ bot.on('postback:JOIN_ONLINE_GROUPS', (payload, chat) => {
  access('join_online_groups',chat)
 })
 
-bot.on('referral', (payload, chat) => {
- get_user(chat.userId).then(function(chat_user){
-    let country_lang = payload.referral.ref.split('-')
-    if (chat_user.length == 0)
-     create_user(payload.recipient.id,country_lang[1],country_lang[0])
-    else {
-     update_user(chat_user[0].id,country_lang[1],country_lang[0])
-    }
-    chat.say(eval(country_lang[1]).greetings[0])
-    eval(country_lang[1]).intro()
- })
-
-})
+// bot.on('referral', (payload, chat) => {
+//  get_user(chat.userId).then(function(chat_user){
+//     let country_lang = payload.referral.ref.split('-')
+//     if (chat_user.length == 0)
+//      create_user(payload.recipient.id,country_lang[1],country_lang[0])
+//     else {
+//      update_user(chat_user[0].id,country_lang[1],country_lang[0])
+//     }
+//     chat.say(eval(country_lang[1]).greetings[0])
+//     eval(country_lang[1]).intro()
+//  })
+//
+// })
 
 bot.app.route('/test-server').get(function(req,res) {
  res.send('Server is running!')

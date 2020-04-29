@@ -8,7 +8,7 @@ exports.submit = function(convo){
            content:convo.get('question'),
            type:convo.get('type'),
            radio_station:convo.get('station'),
-           full_name:convo.get('name') }},
+           country:convo.get('country') }},
          function (error, response, body) {
           console.log(body)
           if (!error)
@@ -16,5 +16,14 @@ exports.submit = function(convo){
           else
            reject(false)
          })
+ })
+}
+
+exports.get_user = function(userId) {
+   return new Promise(function(resolve,reject) {
+                  request({url: env_vars.uri+'/api/v1/covid19/chat_users?user_id=m-'+userId,json:true},
+                   function(err,res,json) {
+                    resolve(json);
+                  })
  })
 }
