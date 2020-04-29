@@ -1,5 +1,5 @@
 'use strict';
-const BootBot = require('bootbot');
+const BootBot = require('bootbot-multipage');
 var request = require('request');
 const en = require('./corona-en');
 const am = require('./corona-am');
@@ -87,11 +87,11 @@ const update_language = function(id,language) {
  })
 }
 
-const access = function(func,chat) {
+const access = function(func,payload,chat) {
  get_user(chat.userId).then(function(chat_user){
     // console.log(eval(chat_user[0].language))
     if (chat_user.length == 0)
-     en[func](chat)
+     get_started(payload,chat)
     else {
      eval(chat_user[0].language)[func](chat)
     }
@@ -183,59 +183,59 @@ bot.hear(['hello','hi','start','salut','au début','ሰላም','መጀመሪያ'
 
 
 bot.on('postback:GO_BACK', (payload, chat) => {
- access('go_back',chat)
+ access('go_back',payload,chat)
 })
 bot.hear('Tips & resources', (payload, chat) => {
- access('working_from_home',chat)
+ access('working_from_home',payload,chat)
 });
 
 bot.on('postback:TIPS_AND_RESOURCES', (payload, chat) => {
- access('working_from_home',chat)
+ access('working_from_home',payload,chat)
 });
 
 bot.hear('Send your question',(payload,chat) => {
 	chat.conversation((convo) => {
-  access('confirm_question',convo)
+  access('confirm_question',payload,convo)
 	});
 })
 
 bot.on('postback:ASK',(payload,chat) => {
 	chat.conversation((convo) => {
-  access('confirm_question',convo)
+  access('confirm_question',payload,convo)
 	});
 })
 
 bot.on('postback:LEARN', (payload, chat) => {
- access('learn_about_covid',chat)
+ access('learn_about_covid',payload,chat)
 });
 
 bot.hear('COVID-19', (payload, chat) => {
- access('learn_about_covid',chat)
+ access('learn_about_covid',payload,chat)
 });
 
 bot.on('postback:HOW_THE_VIRUS_IS_SPREAD', (payload, chat) => {
- access('how_the_virus_is_spread',chat)
+ access('how_the_virus_is_spread',payload,chat)
 })
 
 bot.on('postback:SYMPTOMS_OF_INFECTION', (payload, chat) => {
- access('symptoms_of_infection',chat)
+ access('symptoms_of_infection',payload,chat)
 })
 
 bot.on('postback:MYTHS_MISINFORMATION', (payload, chat) => {
- access('myths_misinformation',chat)
+ access('myths_misinformation',payload,chat)
 })
 
 bot.on('postback:SAFETY_FOR_BROADCASTERS', (payload, chat) => {
- access('safety_for_broadcasters',chat)
+ access('safety_for_broadcasters',payload,chat)
 })
 
 
 bot.on('postback:BROADCASTER_RESOURCES', (payload, chat) => {
- access('broadcaster_resources',chat)
+ access('broadcaster_resources',payload,chat)
 })
 
 bot.on('postback:JOIN_ONLINE_GROUPS', (payload, chat) => {
- access('join_online_groups',chat)
+ access('join_online_groups',payload,chat)
 })
 
 // bot.on('referral', (payload, chat) => {
