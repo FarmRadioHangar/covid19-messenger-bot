@@ -101,7 +101,7 @@ exports.GOOD_RADIO_RESOURCES = (chat) => {
   	cards: [
     {
      title: 'Good radio resources',
-      image_url: 'https://wire.farmradio.fm/wp-content/themes/fri-wire/images/script-of-the-week.jpeg',
+      image_url: 'https://wire.farmradio.fm/wp-content/uploads/2018/01/broadcaster-resources-image.jpg',
       buttons: [
     		  { type: 'postback', title: 'Emergency programs', payload: 'EMERGENCY_PROGRAMS' },
     		  { type: 'postback', title: 'Farm Radio resources',payload:'FARM_RADIO_RESOURCES'},
