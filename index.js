@@ -7,11 +7,7 @@ const fr = require('./corona-fr');
 const env_vars = require('./env')
 const get_user = require('./question-handler').get_user;
 
-const bot = new BootBot({
-  accessToken: 'EAANOret9tIoBAFdfqZCIwOArZCcFlKBin2nM5aoKo6dRWdA7OvNI5Bo9orQxq4ezvTTocBw1F6xs77Fl0DotrUwQgFoA8aBSgRdEtcEgEJkqWUoR0DgdxYYxZCprOyN0vyqTrTO7EZAtXS7uhnyGAKFQQwXzXrLGO0efworGhGZC8UzZCb5QnjNxDg2zrCoYsZD',
-  verifyToken: 'hello_facebook',
-  appSecret: '19dc3b46a9124b3f989116c6e68335a4',
-});
+const bot = new BootBot(env_vars.bot_codes);
 
 
 
@@ -29,18 +25,21 @@ bot.setGreetingText(
  [
    {
      "locale":"default",
-     "text":"This is a messanger bot from Farm Radio International(farmradio.org). \n \
-      \nHere you can find information and resources for broadcasters on Coronavirus (COVID-19)."
+     "text":"This is the FRI Broadcaster COVID-19 messenger bot.\
+      \n\nHere you can find information and resources for broadcasters on coronavirus (COVID-19).\
+      \nWe hope this is useful for planning and preparing your radio program."
    },
    {
      "locale":"fr_FR",
-     "text":"This is a messanger bot from Farm Radio International(farmradio.org). \n \
-     \nHere you can find information and resources for broadcasters on Coronavirus (COVID-19)."
+     "text":"This is the FRI Broadcaster COVID-19 messenger bot.\
+      \n\nHere you can find information and resources for broadcasters on coronavirus (COVID-19).\
+      \nWe hope this is useful for planning and preparing your radio program."
    },
    {
      "locale":"fr_CA",
-     "text":"This is a messanger bot from Farm Radio International(farmradio.org). \n \
-     \nHere you can find information and resources for broadcasters on Coronavirus (COVID-19)."
+     "text":"This is the FRI Broadcaster COVID-19 messenger bot.\
+      \n\nHere you can find information and resources for broadcasters on coronavirus (COVID-19).\
+      \nWe hope this is useful for planning and preparing your radio program."
    }
  ]
 )
@@ -87,16 +86,6 @@ const update_language = function(id,language) {
  })
 }
 
-const access = function(func,payload,chat) {
- get_user(chat.userId).then(function(chat_user){
-    // console.log(eval(chat_user[0].language))
-    if (chat_user.length == 0)
-     get_started(payload,chat)
-    else {
-     eval(chat_user[0].language)[func](chat)
-    }
- })
-}
 
 const setLanguage = (convo,id) => {
  convo.ask({
@@ -142,7 +131,7 @@ const newUser = (convo,user) => {
   }
   else if (answer == 'English') {
    convo.set('lang','en')
-   convo.say(`Hi ${user.first_name}`)
+   convo.say(`Hello ${user.first_name}`)
   }
   else if (answer == 'Français'){
    convo.set('lang','fr')
@@ -157,6 +146,19 @@ const newUser = (convo,user) => {
   })
 
  });
+}
+
+const access = function(payload,chat,func=null) {
+ get_user(chat.userId).then(function(chat_user){
+    // console.log(eval(chat_user[0].language))
+    if (chat_user.length == 0)
+     get_started(payload,chat)
+    else if(func)
+     eval(chat_user[0].language)[func](chat)
+    else {
+     eval(chat_user[0].language)[payload.postback.payload](chat)
+    }
+ })
 }
 
 bot.hear(['hello','hi','start','salut','au début','ሰላም','መጀመሪያ'], (payload, chat) => {
@@ -181,62 +183,33 @@ bot.hear(['hello','hi','start','salut','au début','ሰላም','መጀመሪያ'
  })
 });
 
-
-bot.on('postback:GO_BACK', (payload, chat) => {
- access('go_back',payload,chat)
-})
-bot.hear('Tips & resources', (payload, chat) => {
- access('working_from_home',payload,chat)
+bot.on('postback', (payload, chat) => {
+ access(payload,chat)
 });
 
-bot.on('postback:TIPS_AND_RESOURCES', (payload, chat) => {
- access('working_from_home',payload,chat)
+// -- the routes after this line are not used
+bot.hear('Learn about COVID-19', (payload, chat) => {
+ access(payload,chat,'LEARN_ABOUT_COVID')
 });
 
-bot.hear('Send your question',(payload,chat) => {
-	chat.conversation((convo) => {
-  access('confirm_question',payload,convo)
-	});
-})
-
-bot.on('postback:ASK',(payload,chat) => {
-	chat.conversation((convo) => {
-  access('confirm_question',payload,convo)
-	});
-})
-
-bot.on('postback:LEARN', (payload, chat) => {
- access('learn_about_covid',payload,chat)
+bot.hear('Get radio resources', (payload, chat) => {
+ access(payload,chat,'GET_RADIO_RESOURCES')
 });
+
+bot.hear('Fact-check myths', (payload, chat) => {
+ access(payload,chat,'FACT_CHECK_MYTHS')
+});
+
+// bot.on('postback:ASK',(payload,chat) => {
+// 	chat.conversation((convo) => {
+//   access('confirm_question',payload,convo)
+// 	});
+// })
 
 bot.hear('COVID-19', (payload, chat) => {
- access('learn_about_covid',payload,chat)
+ access(payload,chat,'learn_about_covid')
 });
 
-bot.on('postback:HOW_THE_VIRUS_IS_SPREAD', (payload, chat) => {
- access('how_the_virus_is_spread',payload,chat)
-})
-
-bot.on('postback:SYMPTOMS_OF_INFECTION', (payload, chat) => {
- access('symptoms_of_infection',payload,chat)
-})
-
-bot.on('postback:MYTHS_MISINFORMATION', (payload, chat) => {
- access('myths_misinformation',payload,chat)
-})
-
-bot.on('postback:SAFETY_FOR_BROADCASTERS', (payload, chat) => {
- access('safety_for_broadcasters',payload,chat)
-})
-
-
-bot.on('postback:BROADCASTER_RESOURCES', (payload, chat) => {
- access('broadcaster_resources',payload,chat)
-})
-
-bot.on('postback:JOIN_ONLINE_GROUPS', (payload, chat) => {
- access('join_online_groups',payload,chat)
-})
 
 // bot.on('referral', (payload, chat) => {
 //  get_user(chat.userId).then(function(chat_user){
