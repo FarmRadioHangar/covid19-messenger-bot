@@ -188,15 +188,15 @@ bot.on('postback', (payload, chat) => {
 });
 
 // -- the routes after this line are not used
-bot.hear('Learn about COVID-19', (payload, chat) => {
+bot.hear(['Infos clés-COVID-19','Learn about COVID-19'], (payload, chat) => {
  access(payload,chat,'LEARN_ABOUT_COVID')
 });
 
-bot.hear('Get radio resources', (payload, chat) => {
+bot.hear(['Get radio resources','Ressources radiophoniques'], (payload, chat) => {
  access(payload,chat,'GET_RADIO_RESOURCES')
 });
 
-bot.hear('Fact-check myths', (payload, chat) => {
+bot.hear(['Fact-check myths','Vérification des mythes'], (payload, chat) => {
  access(payload,chat,'FACT_CHECK_MYTHS')
 });
 
