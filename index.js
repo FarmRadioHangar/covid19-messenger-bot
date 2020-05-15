@@ -89,14 +89,14 @@ const update_language = function(id,language) {
 
 const setLanguage = (convo,id) => {
  convo.ask({
-  text: 'Language | Langue | ቋንቋ',
-  quickReplies: ["English",'Français','አማርኛ']
+  text: 'Language | Langue',
+  quickReplies: ["English",'Français']
  },(payload, convo)=> {
   const answer = payload.message.text;
 
   if (answer == 'አማርኛ') {
      update_language(id,'am').then(function(response){
-      en.intro(convo)
+      am.intro(convo)
       convo.end()
      })
   }
@@ -108,7 +108,7 @@ const setLanguage = (convo,id) => {
   }
   else if (answer == 'Français'){
    update_language(id,'fr').then(function(response){
-    en.intro(convo)
+    fr.intro(convo)
     convo.end()
    })
   }
@@ -135,7 +135,7 @@ const newUser = (convo,user) => {
   }
   else if (answer == 'Français'){
    convo.set('lang','fr')
-   convo.say(`salute ${user.first_name}`)
+   convo.say(`Salut ${user.first_name}`)
   }
   else
    newUser(convo)
@@ -161,7 +161,7 @@ const access = function(payload,chat,func=null) {
  })
 }
 
-bot.hear(['hello','hi','start','salut','au début','ሰላም','መጀመሪያ'], (payload, chat) => {
+bot.hear(['hello','hi','start','salut','début','ሰላም','መጀመሪያ'], (payload, chat) => {
  // Send a text message followed by another text message that contains a typing indicator
  let user_check = get_user(chat.userId)
 

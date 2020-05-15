@@ -1,17 +1,15 @@
 const fetch = require('./fetch');
-const lang = 'en'
+const lang = 'fr'
 
-exports.greetings = []
+exports.greetings = ['salut','Salut','Bonjour','bonjour','début','Début']
 exports.intro = (chat) => {
  chat.say({
-  text: 'This is the FRI Broadcaster COVID-19 messenger bot. \n \
-  \nHere you can find information and resources for broadcasters on coronavirus (COVID-19).\
-  \nWe hope this is useful for planning and preparing your radio program.\
-  \n\nWhat do you want  do?',
+  text: 'TC’est le chatbot du COVID-19 pour les partenaires de radiodiffusion de RRI. Ici vous trouverez des infos et des ressources sur le coronavirus. On espère que ce service vous aidera  à planifier et préparer votre émission radiophonique.\
+     \n\nQue recherchez-vous?',
   buttons: [
-   { type: 'postback', title: '🦠 Learn about COVID-19', payload:'LEARN_ABOUT_COVID' },
-   { type: 'postback', title: '🎙 Get radio resources', payload: 'GET_RADIO_RESOURCES' },
-   { type: 'postback', title: '❓ Fact-check myths', payload: 'FACT_CHECK_MYTHS' },
+   { type: 'postback', title: '🦠 Infos clés-COVID-19', payload:'LEARN_ABOUT_COVID' },
+   { type: 'postback', title: '🎙 Ressources radiophoniques', payload: 'GET_RADIO_RESOURCES' },
+   { type: 'postback', title: '❓ Vérification des mythes', payload: 'FACT_CHECK_MYTHS' },
  ]},{typing:true})
 }
 
@@ -19,12 +17,12 @@ exports.LEARN_ABOUT_COVID = (chat) => {
  chat.say({
   	cards: [
     {
-     title: 'Learn about COVID-19',
-      image_url: 'https://farmradio.org/wp-content/uploads/2020/03/covid-19-response_blog.jpg',
+     title: 'Infos clés-COVID-19',
+      image_url: 'https://farmradio.org/wp-content/uploads/2020/03/covid-19-respons-banner_blog-fr.jpg',
       buttons: [
-    		  { type: 'postback', title: 'Basic facts', payload: 'BASIC_FACTS' },
-    		  { type: 'postback', title: 'How the virus spreads',payload:'HOW_THE_VIRUS_SPREADS'},
-    		  { type: 'postback', title: 'Preventive measures', payload: 'PREVENTIVE_MEASURES' }
+    		  { type: 'postback', title: 'Infos clés sur COVID-19', payload: 'BASIC_FACTS' },
+    		  { type: 'postback', title: 'Transmission du virus',payload:'HOW_THE_VIRUS_SPREADS'},
+    		  { type: 'postback', title: 'Mesures préventives', payload: 'PREVENTIVE_MEASURES' }
     	 ]
     }
    ]
@@ -32,51 +30,51 @@ exports.LEARN_ABOUT_COVID = (chat) => {
 }
 
 exports.BASIC_FACTS = (chat) => {
- chat.say({text:"The most common symptoms of COVID-19 are fever, tiredness, and dry cough. Symptoms are usually mild and begin gradually. Some infected people have no symptoms and don't feel ill. People with fever, cough, and difficulty breathing should seek medical attention.",
+ chat.say({text:"Ses symptômes courants sont la fièvre, la fatigue et la toux sèche. Ils sont généralement bénins et apparaissent progressivement. Certains ne présentent aucun symptôme et ne se sentent pas malades.",
 
  buttons: [
-      { type: 'postback', title:"Learn more", payload: 'MORE_BASIC_FACTS'},
-      { type: 'postback', title: 'How the virus spreads', payload:'HOW_THE_VIRUS_SPREADS'},
-      { type: 'postback', title: 'Go back', payload:'GO_BACK' }
+      { type: 'postback', title:"En savoir plus", payload: 'MORE_BASIC_FACTS'},
+      { type: 'postback', title: 'Transmission du virus', payload:'HOW_THE_VIRUS_SPREADS'},
+      { type: 'postback', title: 'Retourner', payload:'GO_BACK' }
     ]
 
   })
 }
 
 exports.MORE_BASIC_FACTS = (chat) => {
- chat.say({text:"Most people (about 80%) recover without special treatment. About 1 in 6 people become seriously ill. Older people and people with health issues such as heart problems, diabetes, and high blood pressure are more likely to become seriously ill.",
+ chat.say({text:"Les personnes qui ont de la fièvre, qui toussent et respirent difficilement doivent demander une aide médicale. Beaucoup (environ 80 %) guérissent sans avoir reçu des soins particuliers. Près d’une personne sur six tombe gravement malade.",
  buttons: [
-      { type: 'web_url', title:"Important info", url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/important_info', webview_height_ratio:'TALL',messenger_extensions: true},
-      { type: 'postback', title: 'Go back', payload:'GO_BACK' }
+      { type: 'web_url', title:"Infos importantes", url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/important_info', webview_height_ratio:'TALL',messenger_extensions: true},
+      { type: 'postback', title: 'Retourner', payload:'GO_BACK' }
     ]
   })
 }
 
 exports.HOW_THE_VIRUS_SPREADS = (chat) => {
- chat.say({text:"People catch COVID-19 from others who have the virus. The disease is spread through small droplets produced when infected people cough, sneeze, or exhale. These droplets can be inhaled by people nearby or land on nearby objects and surfaces. If touched by other people, they can be infected. ",
+ chat.say({text:"Les gens contractent la maladie auprès d’autres qui ont le virus. La maladie se propage par le biais de gouttelettes qui s’échappent lorsque les personnes infectées toussent, éternuent ou expirent. Ces gouttelettes peuvent être inhalées ou touchées par les personnes situées à proximité.",
  buttons: [
-      { type: 'postback', title:"More info", payload: 'MORE_HOW_THE_VIRUS_SPREADS'},
-      { type: 'postback', title:"Basic facts", payload: 'BASIC_FACTS'},
-      { type: 'postback', title: 'Go back', payload:'GO_BACK' }
+      { type: 'postback', title:"En savoir plus", payload: 'MORE_HOW_THE_VIRUS_SPREADS'},
+      { type: 'postback', title:"Infos clés-COVID-19", payload: 'BASIC_FACTS'},
+      { type: 'postback', title: 'Retourner', payload:'GO_BACK' }
     ]
   })
 }
 
 exports.MORE_HOW_THE_VIRUS_SPREADS = (chat) => {
- chat.say({text:"When people inhale droplets or touch contaminated objects or surfaces, then touch their eyes, nose, or mouth, they can be infected. This is why it is important to stay more than 1 metre away from a person who is sick.",
+ chat.say({text:"Lorsque les gens inhalent les gouttelettes ou touchent des objets ou des surfaces contaminés, puis se touchent les yeux, le nez ou la bouche, elles peuvent être infectées. C’est pourquoi il faut rester à plus d’un mètre d’une personne malade.",
   buttons:[
-   {type:'postback',title:'Preventive measures',payload:'PREVENTIVE_MEASURES'},
-   {type:'postback',title:'Go back',payload:'GO_BACK'}
+   {type:'postback',title:'Mesures préventives',payload:'PREVENTIVE_MEASURES'},
+   {type:'postback',title:'Retourner',payload:'GO_BACK'}
   ]
  })
 }
 
 exports.PREVENTIVE_MEASURES = (chat) => {
- chat.say({text:"Wash your hands frequently. Maintain social / physical distancing. Avoid touching your eyes, nose, and mouth. Practice good respiratory hygiene. If you have fever, a cough, and difficulty breathing, seek medical care early. Practice safe greetings.",
+ chat.say({text:"Laver régulièrement les mains. Maintenir une distanciation sociale / physique. Éviter de se toucher les yeux, le nez et la bouche. Pratiquer une bonne hygiène respiratoire. Si vous êtes fiévreux, toussez et respirez difficilement, demandez rapidement une aide médicale. Utiliser les moyens de salutation sécuritaires.",
   buttons:[
-   {type: 'web_url', title:"Learn more", url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/more_preventive_measures', webview_height_ratio:'TALL',messenger_extensions: true},
-   {type:'postback',title:'Basic facts',payload:'BASIC_FACTS'},
-   {type:'postback',title:'Go back',payload:'GO_BACK'}
+   {type: 'web_url', title:"En savoir plus", url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/more_preventive_measures', webview_height_ratio:'TALL',messenger_extensions: true},
+   {type:'postback',title:'Infos clés-COVID-19',payload:'BASIC_FACTS'},
+   {type:'postback',title:'Retourner',payload:'GO_BACK'}
   ]
  })
 }
@@ -84,17 +82,40 @@ exports.PREVENTIVE_MEASURES = (chat) => {
 exports.GET_RADIO_RESOURCES = (chat) => {
  chat.say({
    cards: [
-    {title: 'Broadcaster resources for COVID-19', subtitle:"Staying safe while still working",
+    {title: 'Broadcaster resources for COVID-19',
     image_url: 'https://farmradio.org/wp-content/uploads/2020/03/Precious-Naturinda-website.jpg',
      buttons: [
-      { type: 'web_url', title: 'Working safely', url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/working_safely' , webview_height_ratio:'TALL',messenger_extensions: true},
-      { type: 'web_url', title: 'Protect your health', url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/protect_your_health' , webview_height_ratio:'TALL',messenger_extensions: true},
-      { type: 'postback', title: 'Good radio resources', payload: 'GOOD_RADIO_RESOURCES' }
+      { type: 'postback', title: 'Travailler en sécurité', payload: 'WORKING_SAFELY'},
+      { type: 'web_url', title: 'Rester en bonne santé', url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/protect_your_health' , webview_height_ratio:'TALL',messenger_extensions: true},
+      { type: 'postback', title: 'Ressources radios', payload: 'GOOD_RADIO_RESOURCES' }
     ]},
    ],
    });
 }
 
+exports.WORKING_SAFELY = (chat) => {
+ fetch.content('WORKING_SAFELY').then(function(response){
+  chat.say({
+   text:response[0]['content_'+lang],
+   buttons: [
+    {type: 'postback',title:"Désinfecter",payload:'SANITIZE_YOUR_EQUIPMENT'},
+    {type: 'postback',title:'Retourner',payload:'GO_BACK'}
+   ]
+  })
+ })
+}
+
+exports.SANITIZE_YOUR_EQUIPMENT = (chat) => {
+ fetch.content('sanitize_your_equipment').then(function(response){
+  chat.say({
+   text:response[0]['content_'+lang],
+   buttons: [
+    { type: 'web_url', title: 'Rester en bonne santé', url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/protect_your_health' , webview_height_ratio:'TALL',messenger_extensions: true},
+    {type: 'postback',title:'Retourner',payload:'GO_BACK'}
+   ]
+  })
+ })
+}
 
 exports.GOOD_RADIO_RESOURCES = (chat) => {
  chat.say({
@@ -103,9 +124,9 @@ exports.GOOD_RADIO_RESOURCES = (chat) => {
      title: 'Good radio resources',
       image_url: 'https://wire.farmradio.fm/wp-content/uploads/2018/01/broadcaster-resources-image.jpg',
       buttons: [
-    		  { type: 'postback', title: 'Emergency programs', payload: 'EMERGENCY_PROGRAMS' },
-    		  { type: 'postback', title: 'Farm Radio resources',payload:'FARM_RADIO_RESOURCES'},
-    		  { type: 'postback', title: 'COVID-19 information', payload: 'COVID_INFORMATION' }
+    		  { type: 'postback', title: 'Émissions d’urgence', payload: 'EMERGENCY_PROGRAMS' },
+    		  { type: 'postback', title: 'Ressources-RRI',payload:'FARM_RADIO_RESOURCES'},
+    		  { type: 'postback', title: 'Infos-COVID-19', payload: 'COVID_INFORMATION' }
     	 ]
     }
    ]
@@ -113,63 +134,59 @@ exports.GOOD_RADIO_RESOURCES = (chat) => {
 }
 
 exports.EMERGENCY_PROGRAMS = (chat) => {
- chat.say({text:"Good reporting practices are also important to ensure that people stay calm in a time of emergency and take appropriate action to respond. Farm Radio International has produced a Broadcaster how-to guide on planning and producing effective emergency response programming, and adapted it for the coronavirus pandemic.\n\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/planning-producing-effective-emergency-programming-covid/",
+ chat.say({text:"Il importe d’adopter de bonnes pratiques de reportage pour permettre aux gens de rester calmes en période de crise et prendre les mesures appropriées pour y faire face. RRI a un guide pratique pour la radiodiffusion sur comment planifier et produire des émissions efficaces en temps de crise.\n\nhttp://scripts.farmradio.fm/fr/radio-resource-packs/ressources-sur-covid-19/planifier-et-produire-des-emissions-efficaces-en-temps-de-crise-covid-19/",
   buttons:[
-   {type:'postback',title:'Farm Radio resources',payload:'FARM_RADIO_RESOURCES'},
-   {type:'postback',title:'Go back',payload:'GO_BACK'}
+   {type:'postback',title:'Ressources-RRI',payload:'FARM_RADIO_RESOURCES'},
+   {type:'postback',title:'Retourner',payload:'GO_BACK'}
   ]
  })
 }
 
 exports.FARM_RADIO_RESOURCES = (chat) => {
- chat.say({text:"Farm Radio International is producing a variety of information resources to help broadcasters produce good quality radio programming around COVID-19 and the impact of this crisis on rural populations.",
+ chat.say({text:"RRI partage plusieurs ressources d’information pour aider les radiodiffuseurs à produire de bonnes émissions sur le COVID-19.",
   buttons:[
-   {type:'postback',title:'Farm stories',payload:'FARM_STORIES'},
-   {type:'postback',title:'Key info & radio scripts',payload:'KEY_INFO_AND_RADIO_SCRIPTS'}
+   {type:'postback',title:'Nouvelles agricoles',payload:'FARMER_STORIES'},
+   {type:'postback',title:'Textes radiophoniques',payload:'KEY_INFO_AND_RADIO_SCRIPTS'}
   ]
  })
 }
 
 
-exports.FARM_STORIES = (chat) => {
- chat.say("Barza Wire Farmer stories: https://wire.farmradio.fm/tag/emergencies/")
+exports.FARMER_STORIES = (chat) => {
+ chat.say("Nouvelles agricoles de Barza infos : https://wire.farmradio.fm/fr/tag/urgences/")
 }
 
 exports.KEY_INFO_AND_RADIO_SCRIPTS = (chat) => {
- chat.say("Access Farm Radio’s resources on COVID-19:\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/")
-}
-
-exports.KEY_INFO_AND_RADIO_SCRIPTS = (chat) => {
- chat.say("Access Farm Radio’s resources on COVID-19:\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/")
+ chat.say("Accéder aux ensembles de ressources:\nhttp://scripts.farmradio.fm/fr/radio-resource-packs/ressources-sur-covid-19/")
 }
 
 exports.COVID_INFORMATION = (chat) => {
- chat.say({text:"COVID-19 information",
+ chat.say({text:"Infos-COVID-19",
   buttons:[
-   {type:'postback',title:"FRI's key messages",payload:'FRI_KEY_MESSEGES'},
-   {type:'postback',title:'WHO resources',payload:'WHO_RESOURCES'}
+   {type:'postback',title:"Messages clés-RRI",payload:'FRI_KEY_MESSEGES'},
+   {type:'postback',title:'Ressources-OMS',payload:'WHO_RESOURCES'}
   ]
  })
 }
 
 exports.FRI_KEY_MESSEGES = (chat) => {
- chat.say("Find all these key messages on COVID-19:\n\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/key-information-covid-19-broadcasters/")
+ chat.say("Tous les messages clés de RRI:\n\nhttp://scripts.farmradio.fm/fr/radio-resource-packs/ressources-sur-covid-19/informations-de-base-sur-le-covid-19-pour-la-radiodiffusion/")
 }
 
 exports.WHO_RESOURCES = (chat) => {
- chat.say("Find all the information and resources from the World Health Organization here:\n\nhttps://www.who.int/emergencies/diseases/novel-coronavirus-2019")
+ chat.say("Trouver les informations et les ressources de l’OMS ici:\n\nhttps://www.who.int/fr/emergencies/diseases/novel-coronavirus-2019")
 }
 
 exports.FACT_CHECK_MYTHS = (chat) => {
  chat.say({
   	cards: [
     {
-     title: 'Fact-check myths',
+     title: 'Vérification des mythes',
       image_url: 'https://wire.farmradio.fm/wp-content/uploads/2020/05/FAQs-COVID-graphic.png',
       buttons: [
-        { type: 'web_url', title: 'Truth behind myths', url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/truth_behind_myths' , webview_height_ratio:'TALL',messenger_extensions: true},
-    		  { type: 'postback', title: 'Fight fake news',payload:'FIGHT_FAKE_NEWS'},
-    		  { type: 'postback', title: 'Latest COVID myths', payload: 'LATEST_COVID_MYTHS' }
+        { type: 'web_url', title: 'Vérification des mythes', url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/truth_behind_myths' , webview_height_ratio:'TALL',messenger_extensions: true},
+    		  { type: 'postback', title: 'Plus sur les fausses nouvelles',payload:'FIGHT_FAKE_NEWS'},
+    		  { type: 'postback', title: 'Récents mythe', payload: 'LATEST_COVID_MYTHS' }
     	 ]
     }
    ]
@@ -177,16 +194,16 @@ exports.FACT_CHECK_MYTHS = (chat) => {
 }
 
 exports.FIGHT_FAKE_NEWS = (chat) => {
- chat.say("Learn how to spot fake news and fact-check myths in our Broadcaster how-to guide.\n\nhttp://scripts.farmradio.fm/radio-resource-packs/farm-radio-resource-pack-114/bh2-fake-news-identify/")
+ chat.say("Découvrez comment gérer les fausses nouvelles dans notre guide pratique pour la radiodiffusion. \n\nhttp://scripts.farmradio.fm/fr/radio-resource-packs/114-ensemble-des-ressources-pour-la-radio-agricole/guide-pratique-fausses-nouvelles-comment-les-reconnaitre-et-que-faire-pour-y-remedier/")
 }
 
 exports.LATEST_COVID_MYTHS = (chat) => {
- chat.say("Africa Check is keeping tabs on the latest myths and misconceptions. \n\nGet the latest information: https://africacheck.org/reports/live-guide-all-our-coronavirus-fact-checks-in-one-place/")
+ chat.say("Tous les récents mythes et les données de vérification sont accessibles sur le site web d’Africa Check:\n\nhttps://fr.africacheck.org/")
 }
 
 exports.GO_BACK = (chat) => {
  chat.say({
   text: '↩️',
-		quickReplies: ["Start",'Learn about COVID-19','Get radio resources','Fact-check myths']
+		quickReplies: ["Début",'Infos clés-COVID-19','Ressources radiophoniques','Vérification des mythes','Langue']
 	});
 }

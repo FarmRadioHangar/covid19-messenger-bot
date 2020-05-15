@@ -162,10 +162,6 @@ exports.KEY_INFO_AND_RADIO_SCRIPTS = (chat) => {
  chat.say("Access Farm Radio’s resources on COVID-19:\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/")
 }
 
-exports.KEY_INFO_AND_RADIO_SCRIPTS = (chat) => {
- chat.say("Access Farm Radio’s resources on COVID-19:\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/")
-}
-
 exports.COVID_INFORMATION = (chat) => {
  chat.say({text:"COVID-19 information",
   buttons:[
