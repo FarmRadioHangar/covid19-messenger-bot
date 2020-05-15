@@ -200,6 +200,21 @@ bot.hear('Fact-check myths', (payload, chat) => {
  access(payload,chat,'FACT_CHECK_MYTHS')
 });
 
+bot.hear(['Language','Langue','ቋንቋ'], (payload, chat) => {
+ let user_check = get_user(chat.userId)
+ user_check.then(function(chat_user) {
+    if (chat_user.length == 0){
+     get_started(payload,chat)
+    }
+    else{
+     chat.conversation((convo) => {
+       setLanguage(convo,chat_user[0].id);
+     });
+    }
+ })
+});
+
+
 // bot.on('postback:ASK',(payload,chat) => {
 // 	chat.conversation((convo) => {
 //   access('confirm_question',payload,convo)
