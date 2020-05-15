@@ -87,7 +87,7 @@ exports.GET_RADIO_RESOURCES = (chat) => {
     {title: 'Broadcaster resources for COVID-19', subtitle:"Staying safe while still working",
     image_url: 'https://farmradio.org/wp-content/uploads/2020/03/Precious-Naturinda-website.jpg',
      buttons: [
-      { type: 'web_url', title: 'Working safely', url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/working_safely' , webview_height_ratio:'TALL',messenger_extensions: true},
+      { type: 'postback', title: 'Working safely', payload: 'WORKING_SAFELY'},
       { type: 'web_url', title: 'Protect your health', url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/protect_your_health' , webview_height_ratio:'TALL',messenger_extensions: true},
       { type: 'postback', title: 'Good radio resources', payload: 'GOOD_RADIO_RESOURCES' }
     ]},
@@ -95,6 +95,29 @@ exports.GET_RADIO_RESOURCES = (chat) => {
    });
 }
 
+exports.WORKING_SAFELY = (chat) => {
+ fetch.content('WORKING_SAFELY').then(function(response){
+  chat.say({
+   text:response[0]['content_'+lang],
+   buttons: [
+    {type: 'postback',title:"Sanitize your equipment",payload:'SANITIZE_YOUR_EQUIPMENT'},
+    {type: 'postback',title:'Go back',payload:'GO_BACK'}
+   ]
+  })
+ })
+}
+
+exports.SANITIZE_YOUR_EQUIPMENT = (chat) => {
+ fetch.content('sanitize_your_equipment').then(function(response){
+  chat.say({
+   text:response[0]['content_'+lang],
+   buttons: [
+    { type: 'web_url', title: 'Protect your health', url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/protect_your_health' , webview_height_ratio:'TALL',messenger_extensions: true},
+    {type: 'postback',title:'Go back',payload:'GO_BACK'}
+   ]
+  })
+ })
+}
 
 exports.GOOD_RADIO_RESOURCES = (chat) => {
  chat.say({
@@ -124,14 +147,14 @@ exports.EMERGENCY_PROGRAMS = (chat) => {
 exports.FARM_RADIO_RESOURCES = (chat) => {
  chat.say({text:"Farm Radio International is producing a variety of information resources to help broadcasters produce good quality radio programming around COVID-19 and the impact of this crisis on rural populations.",
   buttons:[
-   {type:'postback',title:'Farm stories',payload:'FARM_STORIES'},
+   {type:'postback',title:'Farmer stories',payload:'FARMER_STORIES'},
    {type:'postback',title:'Key info & radio scripts',payload:'KEY_INFO_AND_RADIO_SCRIPTS'}
   ]
  })
 }
 
 
-exports.FARM_STORIES = (chat) => {
+exports.FARMER_STORIES = (chat) => {
  chat.say("Barza Wire Farmer stories: https://wire.farmradio.fm/tag/emergencies/")
 }
 
@@ -187,6 +210,6 @@ exports.LATEST_COVID_MYTHS = (chat) => {
 exports.GO_BACK = (chat) => {
  chat.say({
   text: '↩️',
-		quickReplies: ["Start",'Learn about COVID-19','Get radio resources','Fact-check myths']
+		quickReplies: ["Start",'Learn about COVID-19','Get radio resources','Fact-check myths','Language']
 	});
 }
