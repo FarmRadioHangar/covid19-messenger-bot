@@ -192,11 +192,11 @@ bot.hear(['Infos clés-COVID-19','Learn about COVID-19'], (payload, chat) => {
  access(payload,chat,'LEARN_ABOUT_COVID')
 });
 
-bot.hear(['Get radio resources','Ressources radiophoniques'], (payload, chat) => {
+bot.hear(['Get radio resources',/Ressources*/], (payload, chat) => {
  access(payload,chat,'GET_RADIO_RESOURCES')
 });
 
-bot.hear(['Fact-check myths','Vérification des mythes'], (payload, chat) => {
+bot.hear(['Fact-check myths',/Vérificatin*/], (payload, chat) => {
  access(payload,chat,'FACT_CHECK_MYTHS')
 });
 
