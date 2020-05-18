@@ -150,9 +150,10 @@ const newUser = (convo,user) => {
 
 const access = function(payload,chat,func=null) {
  get_user(chat.userId).then(function(chat_user){
-    // console.log(eval(chat_user[0].language))
-    if (chat_user.length == 0)
-     get_started(payload,chat)
+    if (chat_user.length == 0) {
+     if (payload.postback.payload != 'BOOTBOT_GET_STARTED')
+      get_started(payload,chat)
+    }
     else if(func)
      eval(chat_user[0].language)[func](chat)
     else {
