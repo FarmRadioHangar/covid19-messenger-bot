@@ -230,19 +230,22 @@ bot.hear('COVID-19', (payload, chat) => {
 });
 
 
-// bot.on('referral', (payload, chat) => {
-//  get_user(chat.userId).then(function(chat_user){
-//     let country_lang = payload.referral.ref.split('-')
-//     if (chat_user.length == 0)
-//      create_user(payload.recipient.id,country_lang[1],country_lang[0])
-//     else {
-//      update_user(chat_user[0].id,country_lang[1],country_lang[0])
-//     }
-//     chat.say(eval(country_lang[1]).greetings[0])
-//     eval(country_lang[1]).intro()
-//  })
-//
-// })
+bot.on('referral', (payload, chat) => {
+ let user_check = get_user(chat.userId)
+
+ user_check.then(function(chat_user) {
+    if (chat_user.length == 0){
+     get_started(payload,chat)
+    }
+    else{
+    	 chat.say('👋😷').then(() => {
+        chat.conversation((convo) => {
+          setLanguage(convo,chat_user[0].id);
+        });
+      })
+    }
+ })
+})
 
 bot.app.route('/test-server').get(function(req,res) {
  res.send('Server is running!')
