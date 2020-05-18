@@ -1,4 +1,4 @@
-Go backconst fetch = require('./fetch');
+const fetch = require('./fetch');
 const lang = 'en'
 
 exports.greetings = ['hi','start','Start','hello','Hi','Hello']
