@@ -4,12 +4,12 @@ const lang = 'fr'
 exports.greetings = ['salut','Salut','Bonjour','bonjour','début','Début']
 exports.intro = (chat) => {
  chat.say({
-  text: 'TC’est le chatbot du COVID-19 pour les partenaires de radiodiffusion de RRI. Ici vous trouverez des infos et des ressources sur le coronavirus. On espère que ce service vous aidera  à planifier et préparer votre émission radiophonique.\
+  text: 'C’est le chatbot du COVID-19 pour les partenaires de radiodiffusion de RRI. Ici vous trouverez des infos et des ressources sur le coronavirus. On espère que ce service vous aidera  à planifier et préparer votre émission radiophonique.\
      \n\nQue recherchez-vous?',
   buttons: [
-   { type: 'postback', title: '🦠 Infos clés-COVID-19', payload:'LEARN_ABOUT_COVID' },
-   { type: 'postback', title: '🎙 Ressources radiophoniques', payload: 'GET_RADIO_RESOURCES' },
-   { type: 'postback', title: '❓ Vérification des mythes', payload: 'FACT_CHECK_MYTHS' },
+   { type: 'postback', title: '🦠Infos clés-COVID-19', payload:'LEARN_ABOUT_COVID' },
+   { type: 'postback', title: '🎙Ressources radiophoniques', payload: 'GET_RADIO_RESOURCES' },
+   { type: 'postback', title: '❓Vérification des mythes', payload: 'FACT_CHECK_MYTHS' },
  ]},{typing:true})
 }
 
@@ -153,7 +153,12 @@ exports.FARM_RADIO_RESOURCES = (chat) => {
 
 
 exports.FARMER_STORIES = (chat) => {
- chat.say("Nouvelles agricoles de Barza infos : https://wire.farmradio.fm/fr/tag/urgences/")
+ chat.say({
+  text:"Nouvelles agricoles de Barza infos : https://wire.farmradio.fm/fr/tag/urgences/",
+  buttons: [
+   {type:'postback',title:'Retourner',payload:'GO_BACK'}
+  ]
+ })
 }
 
 exports.KEY_INFO_AND_RADIO_SCRIPTS = (chat) => {
@@ -170,11 +175,21 @@ exports.COVID_INFORMATION = (chat) => {
 }
 
 exports.FRI_KEY_MESSEGES = (chat) => {
- chat.say("Tous les messages clés de RRI:\n\nhttp://scripts.farmradio.fm/fr/radio-resource-packs/ressources-sur-covid-19/informations-de-base-sur-le-covid-19-pour-la-radiodiffusion/")
+ chat.say({
+  text:"Tous les messages clés de RRI:\n\nhttp://scripts.farmradio.fm/fr/radio-resource-packs/ressources-sur-covid-19/informations-de-base-sur-le-covid-19-pour-la-radiodiffusion/",
+  buttons: [
+   {type:'postback',title:'Retourner',payload:'GO_BACK'}
+  ]
+ })
 }
 
 exports.WHO_RESOURCES = (chat) => {
- chat.say("Trouver les informations et les ressources de l’OMS ici:\n\nhttps://www.who.int/fr/emergencies/diseases/novel-coronavirus-2019")
+ chat.say({
+  text:"Trouver les informations et les ressources de l’OMS ici:\n\nhttps://www.who.int/fr/emergencies/diseases/novel-coronavirus-2019",
+  buttons: [
+   {type:'postback',title:'Retourner',payload:'GO_BACK'}
+  ]
+ })
 }
 
 exports.FACT_CHECK_MYTHS = (chat) => {
@@ -185,8 +200,8 @@ exports.FACT_CHECK_MYTHS = (chat) => {
       image_url: 'https://wire.farmradio.fm/wp-content/uploads/2020/05/FAQs-COVID-graphic.png',
       buttons: [
         { type: 'web_url', title: 'Vérification des mythes', url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/truth_behind_myths' , webview_height_ratio:'TALL',messenger_extensions: true},
-    		  { type: 'postback', title: 'Plus sur les fausses nouvelles',payload:'FIGHT_FAKE_NEWS'},
-    		  { type: 'postback', title: 'Récents mythe', payload: 'LATEST_COVID_MYTHS' }
+    		  { type: 'postback', title: 'Gérer fausses nouvelles',payload:'FIGHT_FAKE_NEWS'},
+    		  { type: 'postback', title: 'Récents mythes', payload: 'LATEST_COVID_MYTHS' }
     	 ]
     }
    ]
@@ -194,11 +209,21 @@ exports.FACT_CHECK_MYTHS = (chat) => {
 }
 
 exports.FIGHT_FAKE_NEWS = (chat) => {
- chat.say("Découvrez comment gérer les fausses nouvelles dans notre guide pratique pour la radiodiffusion. \n\nhttp://scripts.farmradio.fm/fr/radio-resource-packs/114-ensemble-des-ressources-pour-la-radio-agricole/guide-pratique-fausses-nouvelles-comment-les-reconnaitre-et-que-faire-pour-y-remedier/")
+ chat.say({
+  text:"Découvrez comment gérer les fausses nouvelles dans notre guide pratique pour la radiodiffusion. \n\nhttp://scripts.farmradio.fm/fr/radio-resource-packs/114-ensemble-des-ressources-pour-la-radio-agricole/guide-pratique-fausses-nouvelles-comment-les-reconnaitre-et-que-faire-pour-y-remedier/",
+  buttons: [
+   {type:'postback',title:'Retourner',payload:'GO_BACK'}
+  ]
+ })
 }
 
 exports.LATEST_COVID_MYTHS = (chat) => {
- chat.say("Tous les récents mythes et les données de vérification sont accessibles sur le site web d’Africa Check:\n\nhttps://fr.africacheck.org/")
+  chat.say({
+  text:"Tous les récents mythes et les données de vérification sont accessibles sur le site web d’Africa Check:\n\nhttps://fr.africacheck.org/",
+  buttons: [
+   {type:'postback',title:'Retourner',payload:'GO_BACK'}
+  ]
+ })
 }
 
 exports.GO_BACK = (chat) => {

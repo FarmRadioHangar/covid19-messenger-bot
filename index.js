@@ -200,6 +200,10 @@ bot.hear(['Fact-check myths',/Vérificatin*/], (payload, chat) => {
  access(payload,chat,'FACT_CHECK_MYTHS')
 });
 
+bot.hear(['Go back','Retourner'], (payload, chat) => {
+ access(payload,chat,'GO_BACK')
+});
+
 bot.hear(['Language','Langue','ቋንቋ'], (payload, chat) => {
  let user_check = get_user(chat.userId)
  user_check.then(function(chat_user) {

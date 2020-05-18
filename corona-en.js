@@ -155,11 +155,21 @@ exports.FARM_RADIO_RESOURCES = (chat) => {
 
 
 exports.FARMER_STORIES = (chat) => {
- chat.say("Barza Wire Farmer stories: https://wire.farmradio.fm/tag/emergencies/")
+  chat.say({
+  text:"Barza Wire Farmer stories: https://wire.farmradio.fm/tag/emergencies/",
+  buttons: [
+   {type:'postback',title:'Retourner',payload:'GO_BACK'}
+  ]
+ })
 }
 
 exports.KEY_INFO_AND_RADIO_SCRIPTS = (chat) => {
- chat.say("Access Farm Radio’s resources on COVID-19:\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/")
+  chat.say({
+  text:"Access Farm Radio’s resources on COVID-19:\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/",
+  buttons: [
+   {type:'postback',title:'Retourner',payload:'GO_BACK'}
+  ]
+ })
 }
 
 exports.COVID_INFORMATION = (chat) => {
@@ -172,11 +182,21 @@ exports.COVID_INFORMATION = (chat) => {
 }
 
 exports.FRI_KEY_MESSEGES = (chat) => {
- chat.say("Find all these key messages on COVID-19:\n\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/key-information-covid-19-broadcasters/")
+ chat.say({
+  text:"Find all these key messages on COVID-19:\n\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/key-information-covid-19-broadcasters/",
+  buttons: [
+   {type:'postback',title:'Retourner',payload:'GO_BACK'}
+  ]
+ })
 }
 
 exports.WHO_RESOURCES = (chat) => {
- chat.say("Find all the information and resources from the World Health Organization here:\n\nhttps://www.who.int/emergencies/diseases/novel-coronavirus-2019")
+ chat.say({
+  text:"Find all the information and resources from the World Health Organization here:\n\nhttps://www.who.int/emergencies/diseases/novel-coronavirus-2019",
+  buttons: [
+   {type:'postback',title:'Retourner',payload:'GO_BACK'}
+  ]
+ })
 }
 
 exports.FACT_CHECK_MYTHS = (chat) => {
@@ -196,11 +216,21 @@ exports.FACT_CHECK_MYTHS = (chat) => {
 }
 
 exports.FIGHT_FAKE_NEWS = (chat) => {
- chat.say("Learn how to spot fake news and fact-check myths in our Broadcaster how-to guide.\n\nhttp://scripts.farmradio.fm/radio-resource-packs/farm-radio-resource-pack-114/bh2-fake-news-identify/")
+ chat.say({
+  text:"Learn how to spot fake news and fact-check myths in our Broadcaster how-to guide.\n\nhttp://scripts.farmradio.fm/radio-resource-packs/farm-radio-resource-pack-114/bh2-fake-news-identify/",
+  buttons: [
+   {type:'postback',title:'Retourner',payload:'GO_BACK'}
+  ]
+ })
 }
 
 exports.LATEST_COVID_MYTHS = (chat) => {
- chat.say("Africa Check is keeping tabs on the latest myths and misconceptions. \n\nGet the latest information: https://africacheck.org/reports/live-guide-all-our-coronavirus-fact-checks-in-one-place/")
+ chat.say({
+  text:"Africa Check is keeping tabs on the latest myths and misconceptions. \n\nGet the latest information: https://africacheck.org/reports/live-guide-all-our-coronavirus-fact-checks-in-one-place/",
+  buttons: [
+   {type:'postback',title:'Retourner',payload:'GO_BACK'}
+  ]
+ })
 }
 
 exports.GO_BACK = (chat) => {
