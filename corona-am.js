@@ -226,7 +226,7 @@ exports.FIGHT_FAKE_NEWS = (chat) => {
 
 exports.LATEST_COVID_MYTHS = (chat) => {
  chat.say({
-  text"'Africa Check' አሁናዊ በሳይንስ ያልተረጋገጡ እምነቶች ና የተሳሳቱ ግንዛቤዎችን ይከታተላል፡፡ ይህን አድራሻ ተከትለው መረጃ ያግኙ \n\nGet the latest information: https://africacheck.org/reports/live-guide-all-our-coronavirus-fact-checks-in-one-place/",
+  text:"'Africa Check' አሁናዊ በሳይንስ ያልተረጋገጡ እምነቶች ና የተሳሳቱ ግንዛቤዎችን ይከታተላል፡፡ ይህን አድራሻ ተከትለው መረጃ ያግኙ \n\nGet the latest information: https://africacheck.org/reports/live-guide-all-our-coronavirus-fact-checks-in-one-place/",
   buttons: [
    {type:'postback',title:'ለመመለስ',payload:'GO_BACK'}
   ]
