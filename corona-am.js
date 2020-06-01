@@ -87,7 +87,7 @@ exports.GET_RADIO_RESOURCES = (chat) => {
     {title: 'Broadcaster resources for COVID-19', subtitle:"ኮቪድ-19 መረጃ ለሬዲዮ አዘጋጆች",
     image_url: 'https://farmradio.org/wp-content/uploads/2020/03/Precious-Naturinda-website.jpg',
      buttons: [
-      { type: 'web_url', title: 'በጥንቃቄ ለመስራት', url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/working_safely' , webview_height_ratio:'TALL',messenger_extensions: true},
+      { type: 'postback', title: 'በጥንቃቄ ለመስራት', payload: 'WORKING_SAFELY'},
       { type: 'web_url', title: 'ጤናን ለመጠበቅ', url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/protect_your_health' , webview_height_ratio:'TALL',messenger_extensions: true},
       { type: 'postback', title: 'ለራዲዮ የሚሆኑ ጥሩ መረጃዎች', payload: 'GOOD_RADIO_RESOURCES' }
     ]},
@@ -95,6 +95,29 @@ exports.GET_RADIO_RESOURCES = (chat) => {
    });
 }
 
+exports.WORKING_SAFELY = (chat) => {
+ fetch.content('WORKING_SAFELY').then(function(response){
+  chat.say({
+   text:response[0]['content_'+lang],
+   buttons: [
+    {type: 'postback',title:"መሳሪያዎችን ማጽዳት",payload:'SANITIZE_YOUR_EQUIPMENT'},
+    {type: 'postback',title:'ለመመለስ',payload:'GO_BACK'}
+   ]
+  })
+ })
+}
+
+exports.SANITIZE_YOUR_EQUIPMENT = (chat) => {
+ fetch.content('sanitize_your_equipment').then(function(response){
+  chat.say({
+   text:response[0]['content_'+lang],
+   buttons: [
+    { type: 'web_url', title: 'ጤናን ለመጠበቅ', url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/protect_your_health' , webview_height_ratio:'TALL',messenger_extensions: true},
+    {type: 'postback',title:'ለመመለስ',payload:'GO_BACK'}
+   ]
+  })
+ })
+}
 
 exports.GOOD_RADIO_RESOURCES = (chat) => {
  chat.say({
@@ -131,12 +154,22 @@ exports.FARM_RADIO_RESOURCES = (chat) => {
 }
 
 
-exports.FARM_STORIES = (chat) => {
- chat.say("Barza Wire የአርሶ አደር እውነተኛ ታሪኮች: https://wire.farmradio.fm/tag/emergencies/")
+exports.FARMER_STORIES = (chat) => {
+  chat.say({
+  text:"Barza Wire የአርሶ አደር እውነተኛ ታሪኮች: https://wire.farmradio.fm/tag/emergencies/",
+  buttons: [
+   {type:'postback',title:'ለመመለስ',payload:'GO_BACK'}
+  ]
+ })
 }
 
 exports.KEY_INFO_AND_RADIO_SCRIPTS = (chat) => {
- chat.say("ኮቪድ-19 መረጃዎች በስክሪፕት መልክ (ከፋርም ሬድዮ):\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/")
+  chat.say({
+  text:"ኮቪድ-19 መረጃዎች በስክሪፕት መልክ (ከፋርም ሬድዮ):\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/",
+  buttons: [
+   {type:'postback',title:'ለመመለስ',payload:'GO_BACK'}
+  ]
+ })
 }
 
 exports.COVID_INFORMATION = (chat) => {
@@ -149,11 +182,21 @@ exports.COVID_INFORMATION = (chat) => {
 }
 
 exports.FRI_KEY_MESSEGES = (chat) => {
- chat.say("ሁሉንም ቁልፍ መረጃዎች እዚ አድራሻ ላይ ይፈልጉ:\n\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/key-information-covid-19-broadcasters/")
+ chat.say({
+  text:"ሁሉንም ቁልፍ መረጃዎች እዚ አድራሻ ላይ ይፈልጉ:\n\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/key-information-covid-19-broadcasters/",
+  buttons: [
+   {type:'postback',title:'ለመመለስ',payload:'GO_BACK'}
+  ]
+ })
 }
 
 exports.WHO_RESOURCES = (chat) => {
- chat.say("ሁሉንም ቁልፍ መረጃዎች ከአለም ጤና ድርጅት፣ እዚ አድራሻ ላይ ይፈልጉ:\n\nhttps://www.who.int/emergencies/diseases/novel-coronavirus-2019")
+ chat.say({
+  text:"ሁሉንም ቁልፍ መረጃዎች ከአለም ጤና ድርጅት፣ እዚ አድራሻ ላይ ይፈልጉ:\n\nhttps://www.who.int/emergencies/diseases/novel-coronavirus-2019",
+  buttons: [
+   {type:'postback',title:'ለመመለስ',payload:'GO_BACK'}
+  ]
+ })
 }
 
 exports.FACT_CHECK_MYTHS = (chat) => {
@@ -173,11 +216,21 @@ exports.FACT_CHECK_MYTHS = (chat) => {
 }
 
 exports.FIGHT_FAKE_NEWS = (chat) => {
- chat.say("በኛ “Broadcaster how-to guide”  ውስጥ ሀሰተኛ ዜናዎችን ና ሳይንሳዊ ያልሆኑ እምነቶች እውነተኛነትን እንዴት መለየት እንደሚችሉ ይማሩ፡፡ \n\nhttp://scripts.farmradio.fm/radio-resource-packs/farm-radio-resource-pack-114/bh2-fake-news-identify/")
+ chat.say({
+  text:"በኛ “Broadcaster how-to guide”  ውስጥ ሀሰተኛ ዜናዎችን ና ሳይንሳዊ ያልሆኑ እምነቶች እውነተኛነትን እንዴት መለየት እንደሚችሉ ይማሩ፡፡ \n\nhttp://scripts.farmradio.fm/radio-resource-packs/farm-radio-resource-pack-114/bh2-fake-news-identify/",
+  buttons: [
+   {type:'postback',title:'ለመመለስ',payload:'GO_BACK'}
+  ]
+ })
 }
 
 exports.LATEST_COVID_MYTHS = (chat) => {
- chat.say("“Africa Check”  አሁናዊ በሳይንስ ያልተረጋገጡ እምነቶች ና የተሳሳቱ ግንዛቤዎችን ይከታተላል፡፡ ይህን አድራሻ ተከትለው መረጃ ያግኙ \n\nGet the latest information: https://africacheck.org/reports/live-guide-all-our-coronavirus-fact-checks-in-one-place/")
+ chat.say({
+  text"“Africa Check”  አሁናዊ በሳይንስ ያልተረጋገጡ እምነቶች ና የተሳሳቱ ግንዛቤዎችን ይከታተላል፡፡ ይህን አድራሻ ተከትለው መረጃ ያግኙ \n\nGet the latest information: https://africacheck.org/reports/live-guide-all-our-coronavirus-fact-checks-in-one-place/",
+  buttons: [
+   {type:'postback',title:'ለመመለስ',payload:'GO_BACK'}
+  ]
+ })
 }
 
 exports.GO_BACK = (chat) => {
