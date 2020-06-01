@@ -84,7 +84,7 @@ exports.PREVENTIVE_MEASURES = (chat) => {
 exports.GET_RADIO_RESOURCES = (chat) => {
  chat.say({
    cards: [
-    {title: 'Broadcaster resources for COVID-19', subtitle:"ኮቪድ-19 መረጃ ለሬዲዮ አዘጋጆች",
+    {title:"ኮቪድ-19 መረጃ ለሬዲዮ አዘጋጆች",
     image_url: 'https://farmradio.org/wp-content/uploads/2020/03/Precious-Naturinda-website.jpg',
      buttons: [
       { type: 'postback', title: 'በጥንቃቄ ለመስራት', payload: 'WORKING_SAFELY'},
@@ -204,6 +204,7 @@ exports.FACT_CHECK_MYTHS = (chat) => {
   	cards: [
     {
      title: 'የተዛቡ መረጃዎችን ማረጋገጥ',
+     subtitle: 'አድማጮችዎ ትክክለኛ መረጃ ኖሯቸው ስለጤናቸው ደህንነት እና የገቢ ምንጮቻቸው ጥሩ ውሳኔ እንዲወስኑ ሳይንሳዊ ያልሆኑ እምነቶችንና ሀሰተኛ ዜናዎችን ማስወገድ አስፈላጊ ነው፡፡',
       image_url: 'https://wire.farmradio.fm/wp-content/uploads/2020/05/FAQs-COVID-graphic.png',
       buttons: [
         { type: 'web_url', title: 'እውነታ ለሀሰተኛ መረጃዎች', url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/truth_behind_myths' , webview_height_ratio:'TALL',messenger_extensions: true},
@@ -226,7 +227,7 @@ exports.FIGHT_FAKE_NEWS = (chat) => {
 
 exports.LATEST_COVID_MYTHS = (chat) => {
  chat.say({
-  text:"'Africa Check' አሁናዊ በሳይንስ ያልተረጋገጡ እምነቶች ና የተሳሳቱ ግንዛቤዎችን ይከታተላል፡፡ ይህን አድራሻ ተከትለው መረጃ ያግኙ \n\nGet the latest information: https://africacheck.org/reports/live-guide-all-our-coronavirus-fact-checks-in-one-place/",
+  text:"'Africa Check' አሁናዊ በሳይንስ ያልተረጋገጡ እምነቶች ና የተሳሳቱ ግንዛቤዎችን ይከታተላል፡፡ ይህን አድራሻ ተከትለው መረጃ ያግኙ \n\nይህን አድራሻ ተከትለው መረጃ ያግኙ: https://africacheck.org/reports/live-guide-all-our-coronavirus-fact-checks-in-one-place/",
   buttons: [
    {type:'postback',title:'ለመመለስ',payload:'GO_BACK'}
   ]
