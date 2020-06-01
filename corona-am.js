@@ -217,7 +217,7 @@ exports.FACT_CHECK_MYTHS = (chat) => {
 
 exports.FIGHT_FAKE_NEWS = (chat) => {
  chat.say({
-  text:"በኛ “Broadcaster how-to guide”  ውስጥ ሀሰተኛ ዜናዎችን ና ሳይንሳዊ ያልሆኑ እምነቶች እውነተኛነትን እንዴት መለየት እንደሚችሉ ይማሩ፡፡ \n\nhttp://scripts.farmradio.fm/radio-resource-packs/farm-radio-resource-pack-114/bh2-fake-news-identify/",
+  text:"በኛ 'Broadcaster how-to guide'  ውስጥ ሀሰተኛ ዜናዎችን ና ሳይንሳዊ ያልሆኑ እምነቶች እውነተኛነትን እንዴት መለየት እንደሚችሉ ይማሩ፡፡ \n\nhttp://scripts.farmradio.fm/radio-resource-packs/farm-radio-resource-pack-114/bh2-fake-news-identify/",
   buttons: [
    {type:'postback',title:'ለመመለስ',payload:'GO_BACK'}
   ]
@@ -226,7 +226,7 @@ exports.FIGHT_FAKE_NEWS = (chat) => {
 
 exports.LATEST_COVID_MYTHS = (chat) => {
  chat.say({
-  text"“Africa Check”  አሁናዊ በሳይንስ ያልተረጋገጡ እምነቶች ና የተሳሳቱ ግንዛቤዎችን ይከታተላል፡፡ ይህን አድራሻ ተከትለው መረጃ ያግኙ \n\nGet the latest information: https://africacheck.org/reports/live-guide-all-our-coronavirus-fact-checks-in-one-place/",
+  text"'Africa Check' አሁናዊ በሳይንስ ያልተረጋገጡ እምነቶች ና የተሳሳቱ ግንዛቤዎችን ይከታተላል፡፡ ይህን አድራሻ ተከትለው መረጃ ያግኙ \n\nGet the latest information: https://africacheck.org/reports/live-guide-all-our-coronavirus-fact-checks-in-one-place/",
   buttons: [
    {type:'postback',title:'ለመመለስ',payload:'GO_BACK'}
   ]
