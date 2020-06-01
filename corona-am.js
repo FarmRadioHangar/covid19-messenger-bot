@@ -1,17 +1,17 @@
 const fetch = require('./fetch');
-const lang = 'en'
+const lang = 'am'
 
-exports.greetings = []
+exports.greetings = ['ሰላም','ጀምር','መጀመሪያ']
 exports.intro = (chat) => {
  chat.say({
-  text: 'This is the FRI Broadcaster COVID-19 messenger bot. \n \
-  \nHere you can find information and resources for broadcasters on coronavirus (COVID-19).\
-  \nWe hope this is useful for planning and preparing your radio program.\
-  \n\nWhat do you want  do?',
+  text: 'ይህ የፌስ ቡክ ሜሴንጀር ቦት ከፋርም ራድዮ ኢንተርናሽናል ነው። \n \
+  \nእዚህ ለራዲዮ ጋዜጠኞች የሚሆኑ ከኮሮና ቫይረስሽ(ኮቪድ-19) ጋር የሚገናኙ መረጃና ሰነዶች ያገኛሉ።\
+  \nሬድዮ ፕሮግራም ሲያቅዱም ሆነ ሲያዘጋጁ ይጠቅሞታል ብለን ተስፋ እናደርጋለን።\
+  \n\nምን ማድረግ ይፈልጋሉ?',
   buttons: [
-   { type: 'postback', title: '🦠 Learn about COVID-19', payload:'LEARN_ABOUT_COVID' },
-   { type: 'postback', title: '🎙 Get radio resources', payload: 'GET_RADIO_RESOURCES' },
-   { type: 'postback', title: '❓ Fact-check myths', payload: 'FACT_CHECK_MYTHS' },
+   { type: 'postback', title: '🦠ስለኮቪድ-19 ለመማር', payload:'LEARN_ABOUT_COVID' },
+   { type: 'postback', title: '🎙ሬድዮ ፕሮግራም ዝግጅት', payload: 'GET_RADIO_RESOURCES' },
+   { type: 'postback', title: '❓የተዛቡ መረጃዎችን ማረጋገጥ', payload: 'FACT_CHECK_MYTHS' },
  ]},{typing:true})
 }
 
@@ -19,12 +19,12 @@ exports.LEARN_ABOUT_COVID = (chat) => {
  chat.say({
   	cards: [
     {
-     title: 'Learn about COVID-19',
+     title: 'ስለኮቪድ-19 ለመማር',
       image_url: 'https://farmradio.org/wp-content/uploads/2020/03/covid-19-response_blog.jpg',
       buttons: [
-    		  { type: 'postback', title: 'Basic facts', payload: 'BASIC_FACTS' },
-    		  { type: 'postback', title: 'How the virus spreads',payload:'HOW_THE_VIRUS_SPREADS'},
-    		  { type: 'postback', title: 'Preventive measures', payload: 'PREVENTIVE_MEASURES' }
+    		  { type: 'postback', title: 'መሰረታዊ እውነታዎች', payload: 'BASIC_FACTS' },
+    		  { type: 'postback', title: 'ቫይረሱ እንዴት እንደሚሰራጭ',payload:'HOW_THE_VIRUS_SPREADS'},
+    		  { type: 'postback', title: 'የመከላከያ እርምጃዎች', payload: 'PREVENTIVE_MEASURES' }
     	 ]
     }
    ]
@@ -32,51 +32,51 @@ exports.LEARN_ABOUT_COVID = (chat) => {
 }
 
 exports.BASIC_FACTS = (chat) => {
- chat.say({text:"The most common symptoms of COVID-19 are fever, tiredness, and dry cough. Symptoms are usually mild and begin gradually. Some infected people have no symptoms and don't feel ill. People with fever, cough, and difficulty breathing should seek medical attention.",
+ chat.say({text:"በጣም የተለመዱት የኮቪድ-19 ምልክቶች ትኩሳት ድካምና ደረቅ ሳል ናቸው፡፡ አብዛኛውን ግዜ ምልክቶች ቀላልና ቀስ በቀስ የሚጀምሩ ናቸው፡፡ አንድንድ ሰዎች ምንም አይነት ምልክት የላቸውም ፣አይታመሙም::ትኩሳት፣ሳል እና የመተንፈስ ችግር ያላቸው ሰዎች ህክምና መሻት አለባቸው፡፡",
 
  buttons: [
-      { type: 'postback', title:"Learn more", payload: 'MORE_BASIC_FACTS'},
-      { type: 'postback', title: 'How the virus spreads', payload:'HOW_THE_VIRUS_SPREADS'},
-      { type: 'postback', title: 'Go back', payload:'GO_BACK' }
+      { type: 'postback', title:"ተጨማሪ ለማወቅ", payload: 'MORE_BASIC_FACTS'},
+      { type: 'postback', title: 'ቫይረሱ እንዴት እንደሚሰራጭ', payload:'HOW_THE_VIRUS_SPREADS'},
+      { type: 'postback', title: 'ለመመለስ', payload:'GO_BACK' }
     ]
 
   })
 }
 
 exports.MORE_BASIC_FACTS = (chat) => {
- chat.say({text:"Most people (about 80%) recover without special treatment. About 1 in 6 people become seriously ill. Older people and people with health issues such as heart problems, diabetes, and high blood pressure are more likely to become seriously ill.",
+ chat.say({text:"አብዛኞቹ ሰዎች (ወደ 80%) ካለምንም የተለየ ህክምና ያገግማሉ፡፡ ከ6 ሰዎች አንዱ ከፍተኛ ህመም ያጋጥማቸዋል፡፡ ዕድሜያቸው የገፉ፣ እንደ ልብ ህመም ፣ስኳር እና የደም ግፊት ያሉ የጤና ዕክሎች ያሉባቸው ሰዎች ለከፋ ህመም  የመጋለጥ ከፍተኛ ዕድል አላቸው፡",
  buttons: [
-      { type: 'web_url', title:"Important info", url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/important_info', webview_height_ratio:'TALL',messenger_extensions: true},
-      { type: 'postback', title: 'Go back', payload:'GO_BACK' }
+      { type: 'web_url', title:"አስፈላጊ መረጃ", url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/important_info', webview_height_ratio:'TALL',messenger_extensions: true},
+      { type: 'postback', title: 'ለመመለስ', payload:'GO_BACK' }
     ]
   })
 }
 
 exports.HOW_THE_VIRUS_SPREADS = (chat) => {
- chat.say({text:"People catch COVID-19 from others who have the virus. The disease is spread through small droplets produced when infected people cough, sneeze, or exhale. These droplets can be inhaled by people nearby or land on nearby objects and surfaces. If touched by other people, they can be infected. ",
+ chat.say({text:"ሰዎች በኮቪድ-19 የሚያዙት በቫይረሱ በተያዙ ሰዎች አማካይነት ነው፡፡በሽታው የሚሰራጨው በበሽታው የተያዙ ሰዎች ሲያስሉ ሲያስነጥሱ ወይም አየር ወደ ውጭ ሲያስወጡ በሚለቋቸው ቅንጣቶች ነው፡፡ እነዚህ ቅንጣቶች አቅራቢያ ያሉ ሰዎች አየር ወደ ውስጥ ሲስቡ ወደ ሰውነታቸው ሊገቡ ይችላሉ ወይ ደግሞ አቅራቢያ ባሉ ቁሶች ወይም ወለሎች ላይ ሊያርፉ ይችላሉ፡፡ ሌሎች ሰዎች በቫይረሱ የተበከሉ ቁሶችን ወይም ወለሎችን ከነኳቸዉ በቫይረሱ ሊያዙ ይችላሉ፡፡",
  buttons: [
-      { type: 'postback', title:"More info", payload: 'MORE_HOW_THE_VIRUS_SPREADS'},
-      { type: 'postback', title:"Basic facts", payload: 'BASIC_FACTS'},
-      { type: 'postback', title: 'Go back', payload:'GO_BACK' }
+      { type: 'postback', title:"ተጨማሪ መረጃ", payload: 'MORE_HOW_THE_VIRUS_SPREADS'},
+      { type: 'postback', title:"መሰረታዊ እውነታዎች", payload: 'BASIC_FACTS'},
+      { type: 'postback', title: 'ለመመለስ', payload:'GO_BACK' }
     ]
   })
 }
 
 exports.MORE_HOW_THE_VIRUS_SPREADS = (chat) => {
- chat.say({text:"When people inhale droplets or touch contaminated objects or surfaces, then touch their eyes, nose, or mouth, they can be infected. This is why it is important to stay more than 1 metre away from a person who is sick.",
+ chat.say({text:"ሰዎች ቅንጣቶችን ወደ ውስጥ ሲስቡ ወይም በቫይረሱ የተበከሉ ቁሶችን ወይም ወለሎችን ከነኩ በኋላ አይናቸዉን አፍንጫቸውን ወይም አፋቸውን ሲነኩ በቫይረሱ ሊያዙ ይችላሉ፡፡ ለዚህም ነው በቫይረሱ ከተያዘ ሰው ከ1 ሜትር በላይ መራቅ አስፈላጊ የሚሆነው፡፡ ብዙ ሀገራት ከኮቪድ-19 ቫይረስ በከፍተኛ ደረጃ ከመጠቃት ለመጠበቅ ሰዎች ከቤተሰቦቻቸው በስተቀር ከሌሎች ግለሰቦች ሁሉ ቢያንስ አንድ ሜትር መራቅ አለባቸው የሚል ርቀትን መጠበቂያ መመሪያዎችን ተግባራዊ ያደረጉት፡፡",
   buttons:[
-   {type:'postback',title:'Preventive measures',payload:'PREVENTIVE_MEASURES'},
-   {type:'postback',title:'Go back',payload:'GO_BACK'}
+   {type:'postback',title:'የመከላከያ እርምጃዎች',payload:'PREVENTIVE_MEASURES'},
+   {type:'postback',title:'ለመመለስ',payload:'GO_BACK'}
   ]
  })
 }
 
 exports.PREVENTIVE_MEASURES = (chat) => {
- chat.say({text:"Wash your hands frequently. Maintain social / physical distancing. Avoid touching your eyes, nose, and mouth. Practice good respiratory hygiene. If you have fever, a cough, and difficulty breathing, seek medical care early. Practice safe greetings.",
+ chat.say({text:"እጅዎን በተደጋጋሚ ይታጠቡ:: ማህበራዊ/አካላዊ ርቀትን ይጠብቁ፡፡ አይኖችዎን አፍንጫዎንና አፍዎን አይንኩ:: መልካም የአተነፋፈስ ሥርዓትን ይለማመዱ::ትኩሳት፣ ሳል እና የመተንፈስ ችግር ካጋጠመዎት አስቀድመው የህክምና አገልግሎት ያግኙ፡፡ ጥንቃቄ የተሞላባቸውን የሰላምታ አሰጣጥ መንገዶችን ይለማመዱ::",
   buttons:[
-   {type: 'web_url', title:"Learn more", url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/more_preventive_measures', webview_height_ratio:'TALL',messenger_extensions: true},
-   {type:'postback',title:'Basic facts',payload:'BASIC_FACTS'},
-   {type:'postback',title:'Go back',payload:'GO_BACK'}
+   {type: 'web_url', title:"ተጨማሪ ለማወቅ", url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/more_preventive_measures', webview_height_ratio:'TALL',messenger_extensions: true},
+   {type:'postback',title:'መሰረታዊ እውነታዎች',payload:'BASIC_FACTS'},
+   {type:'postback',title:'ለመመለስ',payload:'GO_BACK'}
   ]
  })
 }
@@ -84,12 +84,12 @@ exports.PREVENTIVE_MEASURES = (chat) => {
 exports.GET_RADIO_RESOURCES = (chat) => {
  chat.say({
    cards: [
-    {title: 'Broadcaster resources for COVID-19', subtitle:"Staying safe while still working",
+    {title: 'Broadcaster resources for COVID-19', subtitle:"ኮቪድ-19 መረጃ ለሬዲዮ አዘጋጆች",
     image_url: 'https://farmradio.org/wp-content/uploads/2020/03/Precious-Naturinda-website.jpg',
      buttons: [
-      { type: 'web_url', title: 'Working safely', url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/working_safely' , webview_height_ratio:'TALL',messenger_extensions: true},
-      { type: 'web_url', title: 'Protect your health', url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/protect_your_health' , webview_height_ratio:'TALL',messenger_extensions: true},
-      { type: 'postback', title: 'Good radio resources', payload: 'GOOD_RADIO_RESOURCES' }
+      { type: 'web_url', title: 'በጥንቃቄ ለመስራት', url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/working_safely' , webview_height_ratio:'TALL',messenger_extensions: true},
+      { type: 'web_url', title: 'ጤናን ለመጠበቅ', url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/protect_your_health' , webview_height_ratio:'TALL',messenger_extensions: true},
+      { type: 'postback', title: 'ለራዲዮ የሚሆኑ ጥሩ መረጃዎች', payload: 'GOOD_RADIO_RESOURCES' }
     ]},
    ],
    });
@@ -100,12 +100,12 @@ exports.GOOD_RADIO_RESOURCES = (chat) => {
  chat.say({
   	cards: [
     {
-     title: 'Good radio resources',
+     title: 'ለራዲዮ የሚሆኑ ጥሩ መረጃዎች',
       image_url: 'https://wire.farmradio.fm/wp-content/uploads/2018/01/broadcaster-resources-image.jpg',
       buttons: [
-    		  { type: 'postback', title: 'Emergency programs', payload: 'EMERGENCY_PROGRAMS' },
-    		  { type: 'postback', title: 'Farm Radio resources',payload:'FARM_RADIO_RESOURCES'},
-    		  { type: 'postback', title: 'COVID-19 information', payload: 'COVID_INFORMATION' }
+    		  { type: 'postback', title: 'በአስቸኳይ ጊዜ ማቀድ', payload: 'EMERGENCY_PROGRAMS' },
+    		  { type: 'postback', title: 'የግብርና ራዲዮ መረጃዎች',payload:'FARM_RADIO_RESOURCES'},
+    		  { type: 'postback', title: 'ኮቪድ-19 መረጃዎች', payload: 'COVID_INFORMATION' }
     	 ]
     }
    ]
@@ -113,63 +113,59 @@ exports.GOOD_RADIO_RESOURCES = (chat) => {
 }
 
 exports.EMERGENCY_PROGRAMS = (chat) => {
- chat.say({text:"Good reporting practices are also important to ensure that people stay calm in a time of emergency and take appropriate action to respond. Farm Radio International has produced a Broadcaster how-to guide on planning and producing effective emergency response programming, and adapted it for the coronavirus pandemic.\n\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/planning-producing-effective-emergency-programming-covid/",
+ chat.say({text:"በአስቸኳይ ጊዜ ወቅት ሰዎች በተረጋጋ ስሜት ውስጥ እንዲቆዩ ለማረጋገጥ ና ተገቢውን ምላሽ እንዲሰጡ ጥሩ የራዲዮ ፕሮግራም አቀራረቦች በጣም ጠቃሚ ናቸው፡፡ ውጤታማ የአስቸኳይ ጊዜ ፕሮግራምን ለማቀድና ለማዘጋጀት “Farm Radio International” የራዲዮ ፕሮገራም አቅራቢ መመመሪያ /Broadcaster how-to-guide/ አዘጋጅቶ ለኮረና ቫይረስ ወረርሽኝ እንዲስማማ አድርጓል፡፡\n\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/planning-producing-effective-emergency-programming-covid/",
   buttons:[
-   {type:'postback',title:'Farm Radio resources',payload:'FARM_RADIO_RESOURCES'},
-   {type:'postback',title:'Go back',payload:'GO_BACK'}
+   {type:'postback',title:'የግብርና ራዲዮ መረጃዎች',payload:'FARM_RADIO_RESOURCES'},
+   {type:'postback',title:'ለመመለስ',payload:'GO_BACK'}
   ]
  })
 }
 
 exports.FARM_RADIO_RESOURCES = (chat) => {
- chat.say({text:"Farm Radio International is producing a variety of information resources to help broadcasters produce good quality radio programming around COVID-19 and the impact of this crisis on rural populations.",
+ chat.say({text:"“Farm Radio International” የራዲዮ ፕሮግራም አዘጋጆች ኮቪድ 19 ዙሪያ ና በገጠሩ ህዝብ ላይ ቀውሱ ያለውን ተፅኖ በተመለከተ ጥራት ያለው ፕሮግራም እንዲያዘጋጁ ለመርዳት የተለያዩ የመረጃ ምንጮችን እያዘጋጀ ነው::",
   buttons:[
-   {type:'postback',title:'Farm stories',payload:'FARM_STORIES'},
-   {type:'postback',title:'Key info & radio scripts',payload:'KEY_INFO_AND_RADIO_SCRIPTS'}
+   {type:'postback',title:'የአርሶ አደር እውነተኛ ታሪኮች',payload:'FARM_STORIES'},
+   {type:'postback',title:'ቁልፍ መረጃዎችና የሬድዮ ስክሪፕቶች',payload:'KEY_INFO_AND_RADIO_SCRIPTS'}
   ]
  })
 }
 
 
 exports.FARM_STORIES = (chat) => {
- chat.say("Barza Wire Farmer stories: https://wire.farmradio.fm/tag/emergencies/")
+ chat.say("Barza Wire የአርሶ አደር እውነተኛ ታሪኮች: https://wire.farmradio.fm/tag/emergencies/")
 }
 
 exports.KEY_INFO_AND_RADIO_SCRIPTS = (chat) => {
- chat.say("Access Farm Radio’s resources on COVID-19:\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/")
-}
-
-exports.KEY_INFO_AND_RADIO_SCRIPTS = (chat) => {
- chat.say("Access Farm Radio’s resources on COVID-19:\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/")
+ chat.say("ኮቪድ-19 መረጃዎች በስክሪፕት መልክ (ከፋርም ሬድዮ):\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/")
 }
 
 exports.COVID_INFORMATION = (chat) => {
- chat.say({text:"COVID-19 information",
+ chat.say({text:"ኮቪድ-19 መረጃዎች",
   buttons:[
-   {type:'postback',title:"FRI's key messages",payload:'FRI_KEY_MESSEGES'},
-   {type:'postback',title:'WHO resources',payload:'WHO_RESOURCES'}
+   {type:'postback',title:"ፋርም ሬድዮ ቁልፍ መልክቶች",payload:'FRI_KEY_MESSEGES'},
+   {type:'postback',title:'የአለም ጤና ድርጅት መረጃዎች',payload:'WHO_RESOURCES'}
   ]
  })
 }
 
 exports.FRI_KEY_MESSEGES = (chat) => {
- chat.say("Find all these key messages on COVID-19:\n\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/key-information-covid-19-broadcasters/")
+ chat.say("ሁሉንም ቁልፍ መረጃዎች እዚ አድራሻ ላይ ይፈልጉ:\n\nhttp://scripts.farmradio.fm/radio-resource-packs/covid-19-resources/key-information-covid-19-broadcasters/")
 }
 
 exports.WHO_RESOURCES = (chat) => {
- chat.say("Find all the information and resources from the World Health Organization here:\n\nhttps://www.who.int/emergencies/diseases/novel-coronavirus-2019")
+ chat.say("ሁሉንም ቁልፍ መረጃዎች ከአለም ጤና ድርጅት፣ እዚ አድራሻ ላይ ይፈልጉ:\n\nhttps://www.who.int/emergencies/diseases/novel-coronavirus-2019")
 }
 
 exports.FACT_CHECK_MYTHS = (chat) => {
  chat.say({
   	cards: [
     {
-     title: 'Fact-check myths',
+     title: 'የተዛቡ መረጃዎችን ማረጋገጥ',
       image_url: 'https://wire.farmradio.fm/wp-content/uploads/2020/05/FAQs-COVID-graphic.png',
       buttons: [
-        { type: 'web_url', title: 'Truth behind myths', url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/truth_behind_myths' , webview_height_ratio:'TALL',messenger_extensions: true},
-    		  { type: 'postback', title: 'Fight fake news',payload:'FIGHT_FAKE_NEWS'},
-    		  { type: 'postback', title: 'Latest COVID myths', payload: 'LATEST_COVID_MYTHS' }
+        { type: 'web_url', title: 'እውነታ ለሀሰተኛ መረጃዎች', url: 'https://log.uliza.fm/api/v1/covid19/topic/'+lang+'/truth_behind_myths' , webview_height_ratio:'TALL',messenger_extensions: true},
+    		  { type: 'postback', title: 'ሀሰተኛ ዜና እንዳይሰራጭ',payload:'FIGHT_FAKE_NEWS'},
+    		  { type: 'postback', title: 'የኮቪድ-19 አሁናዊ የተዛቡ ሃሳቦች', payload: 'LATEST_COVID_MYTHS' }
     	 ]
     }
    ]
@@ -177,16 +173,16 @@ exports.FACT_CHECK_MYTHS = (chat) => {
 }
 
 exports.FIGHT_FAKE_NEWS = (chat) => {
- chat.say("Learn how to spot fake news and fact-check myths in our Broadcaster how-to guide.\n\nhttp://scripts.farmradio.fm/radio-resource-packs/farm-radio-resource-pack-114/bh2-fake-news-identify/")
+ chat.say("በኛ “Broadcaster how-to guide”  ውስጥ ሀሰተኛ ዜናዎችን ና ሳይንሳዊ ያልሆኑ እምነቶች እውነተኛነትን እንዴት መለየት እንደሚችሉ ይማሩ፡፡ \n\nhttp://scripts.farmradio.fm/radio-resource-packs/farm-radio-resource-pack-114/bh2-fake-news-identify/")
 }
 
 exports.LATEST_COVID_MYTHS = (chat) => {
- chat.say("Africa Check is keeping tabs on the latest myths and misconceptions. \n\nGet the latest information: https://africacheck.org/reports/live-guide-all-our-coronavirus-fact-checks-in-one-place/")
+ chat.say("“Africa Check”  አሁናዊ በሳይንስ ያልተረጋገጡ እምነቶች ና የተሳሳቱ ግንዛቤዎችን ይከታተላል፡፡ ይህን አድራሻ ተከትለው መረጃ ያግኙ \n\nGet the latest information: https://africacheck.org/reports/live-guide-all-our-coronavirus-fact-checks-in-one-place/")
 }
 
 exports.GO_BACK = (chat) => {
  chat.say({
   text: '↩️',
-		quickReplies: ["Start",'Learn about COVID-19','Get radio resources','Fact-check myths']
+		quickReplies: ["መጀመሪያ",'ስለኮቪድ-19 ለመማር','ሬድዮ ፕሮግራም ዝግጅት','የተዛቡ መረጃዎችን ማረጋገጥ']
 	});
 }
