@@ -183,6 +183,6 @@ exports.LATEST_COVID_MYTHS = (chat) => {
 exports.GO_BACK = (chat) => {
  chat.say({
   text: '↩️',
-		quickReplies: ["መጀመሪያ",'ስለኮቪድ-19 ለመማር','ሬድዮ ፕሮግራም ዝግጅት','የተዛቡ መረጃዎችን ማረጋገጥ']
+		quickReplies: ["መጀመሪያ",'ስለኮቪድ-19 ለመማር','ሬድዮ ፕሮግራም ዝግጅት','የተዛቡ መረጃዎችን ማረጋገጥ','ቋንቋ']
 	});
 }

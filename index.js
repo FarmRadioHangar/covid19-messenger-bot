@@ -89,8 +89,8 @@ const update_language = function(id,language) {
 
 const setLanguage = (convo,id) => {
  convo.ask({
-  text: 'Language | Langue',
-  quickReplies: ["English",'Français']
+  text: 'Language | Langue | ቋንቋ',
+  quickReplies: ["English",'Français', 'አማርኛ']
  },(payload, convo)=> {
   const answer = payload.message.text;
 
