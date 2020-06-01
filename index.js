@@ -189,19 +189,20 @@ bot.on('postback', (payload, chat) => {
 });
 
 // -- the routes after this line are not used
-bot.hear(['Infos clés-COVID-19','Learn about COVID-19'], (payload, chat) => {
+// 'ስለኮቪድ-19 ለመማር','ሬድዮ ፕሮግራም ዝግጅት','የተዛቡ መረጃዎችን ማረጋገጥ',
+bot.hear(['Infos clés-COVID-19','Learn about COVID-19','ስለኮቪድ-19 ለመማር'], (payload, chat) => {
  access(payload,chat,'LEARN_ABOUT_COVID')
 });
 
-bot.hear(['Get radio resources',/Ressources*/], (payload, chat) => {
+bot.hear(['Get radio resources',/Ressources*/,'ሬድዮ ፕሮግራም ዝግጅት'], (payload, chat) => {
  access(payload,chat,'GET_RADIO_RESOURCES')
 });
 
-bot.hear(['Fact-check myths',/Vérificatin*/], (payload, chat) => {
+bot.hear(['Fact-check myths',/Vérificatin*/,'የተዛቡ መረጃዎችን ማረጋገጥ'], (payload, chat) => {
  access(payload,chat,'FACT_CHECK_MYTHS')
 });
 
-bot.hear(['Go back','Retourner'], (payload, chat) => {
+bot.hear(['Go back','Retourner','መጀመሪያ'], (payload, chat) => {
  access(payload,chat,'GO_BACK')
 });
 
