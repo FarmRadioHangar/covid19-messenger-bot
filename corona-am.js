@@ -84,7 +84,7 @@ exports.PREVENTIVE_MEASURES = (chat) => {
 exports.GET_RADIO_RESOURCES = (chat) => {
  chat.say({
    cards: [
-    {title:"ኮቪድ-19 መረጃ ለሬዲዮ አዘጋጆች",
+    {title:"ኮቪድ-19 መረጃ ለሬዲዮ ፕሮግራም አዘጋጆች",
     image_url: 'https://farmradio.org/wp-content/uploads/2020/03/Precious-Naturinda-website.jpg',
      buttons: [
       { type: 'postback', title: 'በጥንቃቄ ለመስራት', payload: 'WORKING_SAFELY'},
